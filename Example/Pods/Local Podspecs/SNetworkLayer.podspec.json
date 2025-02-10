@@ -1,0 +1,22 @@
+{
+  "name": "SNetworkLayer",
+  "version": "0.1.0",
+  "summary": "A short description of SNetworkLayer.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/lucdiasdev/SNetworkLayer",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "lucdiasdev": "lucrodrigs@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/lucdiasdev/SNetworkLayer.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "SNetworkLayer/Classes/**/*"
+}

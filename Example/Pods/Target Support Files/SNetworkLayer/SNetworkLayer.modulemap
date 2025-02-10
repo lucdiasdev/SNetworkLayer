@@ -1,0 +1,6 @@
+framework module SNetworkLayer {
+  umbrella header "SNetworkLayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
