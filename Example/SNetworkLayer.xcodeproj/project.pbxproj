@@ -17,6 +17,7 @@
 		81AD808C7D5A1C659B463284 /* Pods_SNetworkLayer_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA447D7535E9FE2CFA03443 /* Pods_SNetworkLayer_Example.framework */; };
 		AF6248292D5A4CCD009E485B /* ViewModelDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248282D5A4CCD009E485B /* ViewModelDemo.swift */; };
 		AF62482D2D5A5197009E485B /* TextFieldsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62482C2D5A5197009E485B /* TextFieldsCell.swift */; };
+		AF6248322D5B825D009E485B /* API+Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248312D5B825D009E485B /* API+Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		8F8762D0098FD68D627B9AE8 /* Pods-SNetworkLayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNetworkLayer_Tests.release.xcconfig"; path = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AF6248282D5A4CCD009E485B /* ViewModelDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelDemo.swift; sourceTree = "<group>"; };
 		AF62482C2D5A5197009E485B /* TextFieldsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsCell.swift; sourceTree = "<group>"; };
+		AF6248312D5B825D009E485B /* API+Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Service.swift"; sourceTree = "<group>"; };
 		B135226F64B19276BF982FE8 /* Pods-SNetworkLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNetworkLayer_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 		AF62482A2D5A516A009E485B /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				AF6248302D5B8244009E485B /* Service */,
 				607FACD71AFB9204008FA782 /* ViewControllerDemo.swift */,
 				AF6248282D5A4CCD009E485B /* ViewModelDemo.swift */,
 				AF62482B2D5A5175009E485B /* Cell */,
@@ -179,6 +182,14 @@
 				AF62482C2D5A5197009E485B /* TextFieldsCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		AF6248302D5B8244009E485B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AF6248312D5B825D009E485B /* API+Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +367,7 @@
 				AF6248292D5A4CCD009E485B /* ViewModelDemo.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewControllerDemo.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				AF6248322D5B825D009E485B /* API+Service.swift in Sources */,
 				AF62482D2D5A5197009E485B /* TextFieldsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

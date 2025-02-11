@@ -8,32 +8,45 @@
 
 import UIKit
 
+enum TextFieldType {
+    case baseURL
+    case endpointURL
+    case httpMethod
+}
+
+protocol TextFieldsCellDelegate: AnyObject {
+    func didUpdateTextField(value: String, type: TextFieldType)
+}
+
 class TextFieldsCell: UITableViewCell {
     
-    lazy var textFieldInputBaseURL: UITextField = {
+    private lazy var textFieldInputBaseURL: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Input base URL API"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
     
-    lazy var textFieldInputEndpointURL: UITextField = {
+    private lazy var textFieldInputEndpointURL: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Input endpoint API URL"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
     
-    lazy var textFieldInputHttpMethod: UITextField = {
+    private lazy var textFieldInputHttpMethod: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Input HTTP Method"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
     
@@ -46,6 +59,8 @@ class TextFieldsCell: UITableViewCell {
         return label
     }()
     
+    weak var delegate: TextFieldsCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -57,8 +72,17 @@ class TextFieldsCell: UITableViewCell {
         return nil
     }
     
-    func setupCell() {
-        
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        switch textField {
+        case textFieldInputBaseURL:
+            delegate?.didUpdateTextField(value: textField.text ?? "", type: .baseURL)
+        case textFieldInputEndpointURL:
+            delegate?.didUpdateTextField(value: textField.text ?? "", type: .endpointURL)
+        case textFieldInputHttpMethod:
+            delegate?.didUpdateTextField(value: textField.text ?? "", type: .httpMethod)
+        default:
+            break
+        }
     }
     
     private func buildConstraints() {

@@ -9,7 +9,7 @@
 import UIKit
 import SNetworkLayer
 
-class ViewControllerDemo: UIViewController {
+final class ViewControllerDemo: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -26,6 +26,7 @@ class ViewControllerDemo: UIViewController {
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(self.buttonRequestAction), for: .touchUpInside)
         return button
     }()
     
@@ -68,6 +69,10 @@ class ViewControllerDemo: UIViewController {
         tableView.register(TextFieldsCell.self, forCellReuseIdentifier: String(describing: TextFieldsCell.self))
     }
     
+    @objc private func buttonRequestAction() {
+        viewModel.request()
+    }
+    
 }
 
 extension ViewControllerDemo: UITableViewDataSource, UITableViewDelegate {
@@ -83,17 +88,21 @@ extension ViewControllerDemo: UITableViewDataSource, UITableViewDelegate {
                 return .init()
             }
             
-            cell.setupCell()
+            cell.delegate = self
             return cell
-        case .selectionHttpMethod:
-            return UITableViewCell()
-        case .writeHeaders:
-            return UITableViewCell()
-        case .queryParam:
-            return UITableViewCell()
-        case .bodyParam:
-            return UITableViewCell()
         }
     }
 }
 
+extension ViewControllerDemo: TextFieldsCellDelegate {
+    func didUpdateTextField(value: String, type: TextFieldType) {
+        switch type {
+        case .baseURL:
+            viewModel.baseURLString = value
+        case .endpointURL:
+            viewModel.endPointString = value
+        case .httpMethod:
+            viewModel.httpMethodString = .get
+        }
+    }
+}

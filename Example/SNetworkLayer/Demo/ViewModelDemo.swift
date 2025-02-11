@@ -11,17 +11,41 @@ import SNetworkLayer
 
 enum CellsType {
     case textFieldInput
-    case selectionHttpMethod
-    case writeHeaders
-    case queryParam
-    case bodyParam
 }
 
-class ViewModelDemo {
+final class ViewModelDemo {
     
-    let cells: [CellsType] = [.textFieldInput, .selectionHttpMethod, .writeHeaders, .queryParam, .bodyParam]
-    let httpMethod: [HTTPMethod] = [.get, .post]
+    //MARK: ViewControllerDemo Rules
+    let cells: [CellsType] = [.textFieldInput]
+    var baseURLString: String?
+    var endPointString: String?
+    var httpMethodString: HTTPMethod?
+    var headersString: [String: String]?
+    var paramString: String?
     
-    init() { }
+    //MARK: SNetworkLayer demo example using
+    var service: SetTarget?
+    var snetworklayer = SNetworkLayer()
+    
+    init() {
+
+    }
+    
+    func setTargetConfiguration() {
+        snetworklayer.setBaseURL(url: self.baseURLString ?? "")
+        let requester = RequesterClassic<SetTarget>(networkLayer: snetworklayer)
+        
+        service = SetTarget(path: endPointString ?? "",
+                            httpMethod: httpMethodString ?? .get,
+                            headers: nil,
+                            task: .requestDefault,
+                            requester: requester)
+    }
+    
+    func request() {
+        setTargetConfiguration()
+        
+        service?.fetch()
+    }
     
 }

@@ -7,17 +7,15 @@
 
 import Foundation
 
-protocol ExecutorProtocol {
+public protocol ExecutorProtocol {
     func execute(urlRequest: URLRequest,
                  completion: @escaping (Data?, URLResponse?, Error?) -> Void)
 }
 
-final class Executor: ExecutorProtocol {
-//    var loggerType: LoggerType = .json
-    
-    func execute(urlRequest: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+public class Executor: ExecutorProtocol {
+    public init() { }
+    public func execute(urlRequest: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         let fetch = URLSession.shared.dataTask(with: urlRequest, completionHandler: completion)
-//        LoggerData().loggerResponse()
         fetch.resume()
     }
 }

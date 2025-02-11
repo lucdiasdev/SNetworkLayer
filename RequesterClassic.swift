@@ -7,21 +7,25 @@
 
 import Foundation
 
-class RequesterClassic<T: Target> {
+open class RequesterClassic<T: Target> {
     
     var executor: ExecutorProtocol
     var networkLayer: SNetworkLayer
     
-    init(executor: ExecutorProtocol = Executor(), networkLayer: SNetworkLayer) {
+    public init(executor: ExecutorProtocol = Executor(), networkLayer: SNetworkLayer) {
         self.executor = executor
         self.networkLayer = networkLayer
     }
     
-    func fetch<U: Codable, E: Error>(target: T, errorHandler: ErrorHandler<E>? = nil,
-                                     dataType: U.Type, completion: @escaping (Result<U, Error>, URLResponse?) -> Void) {
+    public func fetch<U: Codable, E: Error>(target: T, errorHandler: ErrorHandler<E>? = nil as ErrorHandler<Error>?,
+                                            dataType: U.Type, completion: @escaping (Result<U, Error>, URLResponse?) -> Void) {
         
-        var urlRequest = URLRequest(url: networkLayer.baseURL.appendingPathComponent(target.path))
+        guard let baseURL = networkLayer.baseURL else {
+            assertionFailure("ERROR: baseURL is nil")
+            return }
         
+        var urlRequest = URLRequest(url: baseURL.appendingPathComponent(target.path))
+        print(urlRequest.url) //REMOVER
         urlRequest.httpMethod = target.httpMethod.rawValue
         
         if let headers = target.headers {

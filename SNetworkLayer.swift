@@ -9,13 +9,11 @@ import Foundation
 
 public class SNetworkLayer {
     
-    var baseURL: URL
+    var baseURL: URL?
     
-    init(baseURL: URL) {
-        self.baseURL = baseURL
-    }
+    public init() { }
     
-    func setBaseURL(url: String) {
+    public func setBaseURL(url: String) {
         guard let url = URL(string: url) else {
             assertionFailure("failure baseURL")
             return

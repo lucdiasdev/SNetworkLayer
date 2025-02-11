@@ -30,7 +30,7 @@ protocol ErrorMappingProtocol {
     func mapError(from data: Data?, response: URLResponse?, error: Error?) -> Error
 }
 
-final class ErrorHandler<E: Error>: Error, ErrorMappingProtocol {
+public class ErrorHandler<E: Error>: Error, ErrorMappingProtocol {
     
     private let customMapping: ((Data?, URLResponse?) -> E?)?
     

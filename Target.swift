@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Target {
+public protocol Target {
     var path: String { get }
     var httpMethod: HTTPMethod { get }
     var headers: [String: String]? { get }
