@@ -18,6 +18,7 @@
 		AF6248232D5A440E009E485B /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248222D5A440E009E485B /* Executor.swift */; };
 		AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248242D5A4476009E485B /* SNetworkLayer.swift */; };
 		AF6248272D5A4AE8009E485B /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248262D5A4AE8009E485B /* ErrorHandler.swift */; };
+		AF6248362D5E481D009E485B /* ResponseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248352D5E481D009E485B /* ResponseCode.swift */; };
 		B8648B75BA22D24B4571D92F9E5A4BB0 /* Pods-SNetworkLayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B791E1EEC5981200548974BFB99C0 /* Pods-SNetworkLayer_Example-dummy.m */; };
 		C8D7BAA629577BCBF1B6F538950D7AA6 /* Pods-SNetworkLayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C969696B1124D6152FDD29DAD4091DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
@@ -72,6 +73,7 @@
 		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkLayer.swift; sourceTree = "<group>"; };
 		AF6248262D5A4AE8009E485B /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		AF6248352D5E481D009E485B /* ResponseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCode.swift; sourceTree = "<group>"; };
 		C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
 		CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				AF6248202D5A43D7009E485B /* RequesterClassic.swift */,
 				AF6248222D5A440E009E485B /* Executor.swift */,
 				AF62481E2D5A4338009E485B /* Target.swift */,
+				AF6248352D5E481D009E485B /* ResponseCode.swift */,
 				AF6248262D5A4AE8009E485B /* ErrorHandler.swift */,
 				6D04808EE652BD62A19622A9F34802EF /* ReplaceMe.swift */,
 				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
@@ -397,6 +400,7 @@
 				AF6248212D5A43D7009E485B /* RequesterClassic.swift in Sources */,
 				AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */,
 				1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */,
+				AF6248362D5E481D009E485B /* ResponseCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

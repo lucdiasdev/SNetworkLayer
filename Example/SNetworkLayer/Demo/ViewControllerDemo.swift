@@ -44,6 +44,7 @@ final class ViewControllerDemo: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Swift Network Layer"
+        viewModel.delegate = self
         configureView()
         resgisterCells()
     }
@@ -67,6 +68,7 @@ final class ViewControllerDemo: UIViewController {
     
     func resgisterCells() {
         tableView.register(TextFieldsCell.self, forCellReuseIdentifier: String(describing: TextFieldsCell.self))
+        tableView.register(TextBodyRequestCell.self, forCellReuseIdentifier: String(describing: TextBodyRequestCell.self))
     }
     
     @objc private func buttonRequestAction() {
@@ -90,6 +92,14 @@ extension ViewControllerDemo: UITableViewDataSource, UITableViewDelegate {
             
             cell.delegate = self
             return cell
+            
+        case .textBodyRequest:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextBodyRequestCell.self),
+                                                           for: indexPath) as? TextBodyRequestCell else {
+                return .init()
+            }
+            
+            return cell
         }
     }
 }
@@ -103,6 +113,17 @@ extension ViewControllerDemo: TextFieldsCellDelegate {
             viewModel.endPointString = value
         case .httpMethod:
             viewModel.httpMethodString = .get
+        }
+    }
+}
+
+extension ViewControllerDemo: ViewModelDemoDelegate {
+    func didRequestResponse(response: String) {
+        DispatchQueue.main.async {
+            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? TextBodyRequestCell else { return }
+            let text = response.replacingOccurrences(of: #"\"#, with: "")
+            cell.textBodyRequestLabel.text = text
+            self.tableView.reloadData()
         }
     }
 }

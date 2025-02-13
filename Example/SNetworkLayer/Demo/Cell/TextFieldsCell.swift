@@ -27,6 +27,7 @@ class TextFieldsCell: UITableViewCell {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        textField.text = "https://pokeapi.co/api/v2/"
         return textField
     }()
     
@@ -37,6 +38,7 @@ class TextFieldsCell: UITableViewCell {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        textField.text = "pokemon/ditto"
         return textField
     }()
     

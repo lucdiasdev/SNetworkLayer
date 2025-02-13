@@ -11,12 +11,20 @@ import SNetworkLayer
 
 enum CellsType {
     case textFieldInput
+    case textBodyRequest
+}
+
+protocol ViewModelDemoDelegate: AnyObject {
+    func didRequestResponse(response: String)
 }
 
 final class ViewModelDemo {
     
     //MARK: ViewControllerDemo Rules
-    let cells: [CellsType] = [.textFieldInput]
+    let cells: [CellsType] = [.textFieldInput, .textBodyRequest]
+    
+    weak var delegate: ViewModelDemoDelegate?
+    
     var baseURLString: String?
     var endPointString: String?
     var httpMethodString: HTTPMethod?
@@ -27,13 +35,11 @@ final class ViewModelDemo {
     var service: SetTarget?
     var snetworklayer = SNetworkLayer()
     
-    init() {
-
-    }
+    init() { }
     
     func setTargetConfiguration() {
         snetworklayer.setBaseURL(url: self.baseURLString ?? "")
-        let requester = RequesterClassic<SetTarget>(networkLayer: snetworklayer)
+        let requester = Requester<SetTarget>(networkLayer: snetworklayer)
         
         service = SetTarget(path: endPointString ?? "",
                             httpMethod: httpMethodString ?? .get,
@@ -45,7 +51,18 @@ final class ViewModelDemo {
     func request() {
         setTargetConfiguration()
         
-        service?.fetch()
+//        service?.fetch()
+        
+        guard let service = service else { return }
+        service.requester.fetch(target: service) { [weak self] result, response in
+            guard let self = self else { return }
+            switch result {
+            case .success(let success):
+                self.delegate?.didRequestResponse(response: String(data: success, encoding: .utf8) ?? "")
+            case .failure(_):
+                break
+            }
+        }
     }
     
 }

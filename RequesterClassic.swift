@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class RequesterClassic<T: Target> {
+open class Requester<T: Target> {
     
     var executor: ExecutorProtocol
     var networkLayer: SNetworkLayer
@@ -17,15 +17,13 @@ open class RequesterClassic<T: Target> {
         self.networkLayer = networkLayer
     }
     
-    public func fetch<U: Codable, E: Error>(target: T, errorHandler: ErrorHandler<E>? = nil as ErrorHandler<Error>?,
-                                            dataType: U.Type, completion: @escaping (Result<U, Error>, URLResponse?) -> Void) {
-        
+    private func urlRequestConfiguration(target: T) -> URLRequest {
         guard let baseURL = networkLayer.baseURL else {
             assertionFailure("ERROR: baseURL is nil")
-            return }
+            return .init(url: URL(fileURLWithPath: "")) }
         
         var urlRequest = URLRequest(url: baseURL.appendingPathComponent(target.path))
-        print(urlRequest.url) //REMOVER
+        
         urlRequest.httpMethod = target.httpMethod.rawValue
         
         if let headers = target.headers {
@@ -34,28 +32,62 @@ open class RequesterClassic<T: Target> {
             }
         }
         
+        return urlRequest
+    }
+    
+    public func fetch(target: T, completion: @escaping (Result<Data, Error>, URLResponse?) -> Void) {
+        let urlRequest = urlRequestConfiguration(target: target)
+
         executor.execute(urlRequest: urlRequest) { data, response, error in
-            let handler = errorHandler ?? ErrorHandler<E>(customMapping: nil)
+            
+            
             
             if let error = error {
-                let mappedError = handler.mapError(from: nil, response: response, error: error)
-                completion(.failure(mappedError), response)
+                completion(.failure(error), response)
                 return
             }
             
             guard let data = data else {
-                let mappedError = handler.mapError(from: nil, response: response, error: nil)
-                completion(.failure(mappedError), response)
+                assertionFailure("ERROR PARSE: data is nil")
                 return
             }
             
             do {
-                let decodedData = try JSONDecoder().decode(U.self, from: data)
-                completion(.success(decodedData), response)
+                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted])
+                completion(.success(jsonData), response)
             } catch {
-                let mappedError = handler.mapError(from: data, response: response, error: error)
-                completion(.failure(mappedError), response)
+                completion(.failure(error), response)
             }
         }
     }
+    
+//    public func fetch<U: Codable, E: Error>(target: T, errorHandler: ErrorHandler<E>? = nil as ErrorHandler<Error>?,
+//                                            dataType: U.Type, completion: @escaping (Result<U, Error>, URLResponse?) -> Void) {
+//        let urlRequest = urlRequestConfiguration(target: target)
+//        
+//        executor.execute(urlRequest: urlRequest) { data, response, error in
+//            let handler = errorHandler ?? ErrorHandler<E>(customMapping: nil)
+//            
+//            if let error = error {
+//                let mappedError = handler.mapError(from: nil, response: response, error: error)
+//                completion(.failure(mappedError), response)
+//                return
+//            }
+//            
+//            guard let data = data else {
+//                let mappedError = handler.mapError(from: nil, response: response, error: nil)
+//                completion(.failure(mappedError), response)
+//                return
+//            }
+//            
+//            do {
+//                let decodedData = try JSONDecoder().decode(U.self, from: data)
+//                completion(.success(decodedData), response)
+//            } catch {
+//                let mappedError = handler.mapError(from: data, response: response, error: error)
+//                completion(.failure(mappedError), response)
+//            }
+//        }
+//    }
 }
