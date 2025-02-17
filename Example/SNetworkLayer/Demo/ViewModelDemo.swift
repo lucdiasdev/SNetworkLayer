@@ -33,25 +33,22 @@ final class ViewModelDemo {
     
     //MARK: SNetworkLayer demo example using
     var service: SetTarget?
-    var snetworklayer = SNetworkLayer()
+    var snetworklayer = SNetworkLayer<SetTarget>()
     
     init() { }
     
     func setTargetConfiguration() {
         snetworklayer.setBaseURL(url: self.baseURLString ?? "")
-        let requester = Requester<SetTarget>(networkLayer: snetworklayer)
         
         service = SetTarget(path: endPointString ?? "",
                             httpMethod: httpMethodString ?? .get,
                             headers: nil,
                             task: .requestDefault,
-                            requester: requester)
+                            requester: snetworklayer)
     }
     
     func request() {
         setTargetConfiguration()
-        
-//        service?.fetch()
         
         guard let service = service else { return }
         service.requester.fetch(target: service) { [weak self] result, response in

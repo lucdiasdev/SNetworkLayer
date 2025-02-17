@@ -11,14 +11,14 @@ import SNetworkLayer
 
 final class SetTarget: Target {
     
-    var requester: Requester<SetTarget>
+    var requester: SNetworkLayer<SetTarget>
     
     var path: String
     var httpMethod: HTTPMethod
     var headers: [String: String]?
     var task: Task
     
-    init(path: String, httpMethod: HTTPMethod, headers: [String: String]?, task: Task, requester: Requester<SetTarget>) {
+    init(path: String, httpMethod: HTTPMethod, headers: [String: String]?, task: Task, requester: SNetworkLayer<SetTarget>) {
         self.path = path
         self.httpMethod = httpMethod
         self.headers = headers
@@ -35,21 +35,6 @@ final class SetTarget: Target {
                 print(failure)
             }
         }
-        
-//        requester.fetch(target: self, dataType: Welcome.self) { result, _ in
-//            switch result {
-//            case .success(let success):
-//                print(success)
-//            case .failure(let failure):
-//                print(failure)
-//            }
-//        }
     }
-}
-
-struct Welcome: Codable {
-    let name: String
-    let id: Int
-    let height: Int
-    let weight: Int
+    
 }
