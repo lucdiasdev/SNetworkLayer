@@ -19,6 +19,7 @@
 		AF62482D2D5A5197009E485B /* TextFieldsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62482C2D5A5197009E485B /* TextFieldsCell.swift */; };
 		AF6248322D5B825D009E485B /* SetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248312D5B825D009E485B /* SetTarget.swift */; };
 		AF6248342D5E30DE009E485B /* TextBodyRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248332D5E30DE009E485B /* TextBodyRequestCell.swift */; };
+		AF6248382D664AE7009E485B /* APIStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248372D664AE7009E485B /* APIStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		AF62482C2D5A5197009E485B /* TextFieldsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsCell.swift; sourceTree = "<group>"; };
 		AF6248312D5B825D009E485B /* SetTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTarget.swift; sourceTree = "<group>"; };
 		AF6248332D5E30DE009E485B /* TextBodyRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBodyRequestCell.swift; sourceTree = "<group>"; };
+		AF6248372D664AE7009E485B /* APIStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStruct.swift; sourceTree = "<group>"; };
 		B135226F64B19276BF982FE8 /* Pods-SNetworkLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SNetworkLayer_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				AF6248312D5B825D009E485B /* SetTarget.swift */,
+				AF6248372D664AE7009E485B /* APIStruct.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF6248382D664AE7009E485B /* APIStruct.swift in Sources */,
 				AF6248342D5E30DE009E485B /* TextBodyRequestCell.swift in Sources */,
 				AF6248292D5A4CCD009E485B /* ViewModelDemo.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewControllerDemo.swift in Sources */,

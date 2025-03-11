@@ -72,7 +72,7 @@ final class ViewControllerDemo: UIViewController {
     }
     
     @objc private func buttonRequestAction() {
-        viewModel.request()
+        viewModel.fetchSNetworkLayer()
     }
     
 }
@@ -108,11 +108,14 @@ extension ViewControllerDemo: TextFieldsCellDelegate {
     func didUpdateTextField(value: String, type: TextFieldType) {
         switch type {
         case .baseURL:
-            viewModel.baseURLString = value
+//            viewModel.setConfigureBaseURL(baseURL: value)
+            break
         case .endpointURL:
-            viewModel.endPointString = value
+            break
+            //viewModel.setConfigureEndpoint(endpoint: value)
         case .httpMethod:
-            viewModel.httpMethodString = .get
+            break
+            //viewModel.setHTTPMethod(httpMethod: .get) //TODO: corrigir argumento para receber input
         }
     }
 }

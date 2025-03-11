@@ -8,22 +8,39 @@
 import Foundation
 
 public protocol ExecutorProtocol {
+    //    func execute(urlRequest: URLRequest,
+    //                 completion: @escaping (Data?, URLResponse?, Error?) -> Void)
     func execute(urlRequest: URLRequest,
-                 completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+                 session: URLSession,
+                 completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask
 }
 
 public class Executor: ExecutorProtocol {
     
-    public init() { }
+    public init() {}
     
-    public func execute(urlRequest: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        let fetch = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+    public func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask {
+        let task = session.dataTask(with: urlRequest) { data, response, error in
             self.debug(urlRequest, data, response, error)
-            completion(data, response, error)
+            if let error = error {
+                completion(data, response, FlowError.network(error))
+                return
+            }
+            completion(data, response, nil)
         }
         
-        fetch.resume()
+        task.resume()
+        return task
     }
+    
+//    public func execute(urlRequest: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+//        let fetch = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+//            self.debug(urlRequest, data, response, error)
+//            completion(data, response, error)
+//        }
+//        
+//        fetch.resume()
+//    }
     
     private func debug(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?) {
         

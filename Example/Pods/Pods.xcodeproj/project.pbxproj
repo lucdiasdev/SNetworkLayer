@@ -10,15 +10,13 @@
 		1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8ABB587D7404E187AC725C5DE31BEB /* SNetworkLayer-dummy.m */; };
 		595114791901B15332482B9743FFA2FA /* SNetworkLayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AD2A7336B17D491033DC6A9F18B1E8 /* SNetworkLayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		876FF83F4579686CA5D822A6AF7DC58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		8C6F94E74BC7DADBEBF67534BAFA55C6 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D04808EE652BD62A19622A9F34802EF /* ReplaceMe.swift */; };
 		95729083F538D622FB05BF82F4A7D2B1 /* Pods-SNetworkLayer_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13FE198D69E227CAD41934EEC7023506 /* Pods-SNetworkLayer_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A64133DC6ABBB71E848670A01EDACF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
 		AF62481F2D5A4338009E485B /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62481E2D5A4338009E485B /* Target.swift */; };
-		AF6248212D5A43D7009E485B /* RequesterClassic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248202D5A43D7009E485B /* RequesterClassic.swift */; };
 		AF6248232D5A440E009E485B /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248222D5A440E009E485B /* Executor.swift */; };
 		AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248242D5A4476009E485B /* SNetworkLayer.swift */; };
 		AF6248272D5A4AE8009E485B /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248262D5A4AE8009E485B /* ErrorHandler.swift */; };
-		AF6248362D5E481D009E485B /* ResponseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248352D5E481D009E485B /* ResponseCode.swift */; };
+		AF62485B2D805C92009E485B /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62485A2D805C92009E485B /* Composer.swift */; };
 		B8648B75BA22D24B4571D92F9E5A4BB0 /* Pods-SNetworkLayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B791E1EEC5981200548974BFB99C0 /* Pods-SNetworkLayer_Example-dummy.m */; };
 		C8D7BAA629577BCBF1B6F538950D7AA6 /* Pods-SNetworkLayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C969696B1124D6152FDD29DAD4091DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
@@ -58,7 +56,6 @@
 		59039CAE87C31002B2AE723FF56907B0 /* Pods-SNetworkLayer_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNetworkLayer_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		5A32DBC21D61DFC95AA874CEA3301C97 /* SNetworkLayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNetworkLayer.release.xcconfig; sourceTree = "<group>"; };
 		659226600DE98DD7DCE6CD769D0E09DD /* Pods-SNetworkLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		6D04808EE652BD62A19622A9F34802EF /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = SNetworkLayer/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		7135F9584450735C8E516C548AE3AB4E /* SNetworkLayer.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SNetworkLayer.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		78BF9E620DE7C3D47B31593573DEB638 /* Pods-SNetworkLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SNetworkLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		82AD181C52050B5D7D205ECF7C7C5585 /* Pods-SNetworkLayer_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SNetworkLayer_Example.modulemap"; sourceTree = "<group>"; };
@@ -69,11 +66,10 @@
 		9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SNetworkLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5413A351FF9B07A15CEBB698517A708 /* Pods-SNetworkLayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		AF62481E2D5A4338009E485B /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
-		AF6248202D5A43D7009E485B /* RequesterClassic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterClassic.swift; sourceTree = "<group>"; };
 		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkLayer.swift; sourceTree = "<group>"; };
 		AF6248262D5A4AE8009E485B /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		AF6248352D5E481D009E485B /* ResponseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseCode.swift; sourceTree = "<group>"; };
+		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
 		C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
 		CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -142,13 +138,11 @@
 		3D17F34D1300086D0029E32D4CC9AF9D /* SNetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
-				AF6248202D5A43D7009E485B /* RequesterClassic.swift */,
 				AF6248222D5A440E009E485B /* Executor.swift */,
+				AF62485A2D805C92009E485B /* Composer.swift */,
+				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
 				AF62481E2D5A4338009E485B /* Target.swift */,
-				AF6248352D5E481D009E485B /* ResponseCode.swift */,
 				AF6248262D5A4AE8009E485B /* ErrorHandler.swift */,
-				6D04808EE652BD62A19622A9F34802EF /* ReplaceMe.swift */,
 				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
 				769E9250BEE25EF4838271CC68038329 /* Support Files */,
 			);
@@ -396,11 +390,9 @@
 				AF62481F2D5A4338009E485B /* Target.swift in Sources */,
 				AF6248272D5A4AE8009E485B /* ErrorHandler.swift in Sources */,
 				AF6248232D5A440E009E485B /* Executor.swift in Sources */,
-				8C6F94E74BC7DADBEBF67534BAFA55C6 /* ReplaceMe.swift in Sources */,
-				AF6248212D5A43D7009E485B /* RequesterClassic.swift in Sources */,
 				AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */,
+				AF62485B2D805C92009E485B /* Composer.swift in Sources */,
 				1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */,
-				AF6248362D5E481D009E485B /* ResponseCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

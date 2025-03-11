@@ -22,40 +22,32 @@ final class ViewModelDemo {
     
     //MARK: ViewControllerDemo Rules
     let cells: [CellsType] = [.textFieldInput, .textBodyRequest]
-    
     weak var delegate: ViewModelDemoDelegate?
     
-    var baseURLString: String?
-    var endPointString: String?
-    var httpMethodString: HTTPMethod?
-    var headersString: [String: String]?
-    var paramString: String?
-    
     //MARK: SNetworkLayer demo example using
-    var service: SetTarget?
-    var snetworklayer = SNetworkLayer<SetTarget>()
+    var service = APIStructService()
     
-    init() { }
+    init() {}
     
-    func setTargetConfiguration() {
-        snetworklayer.setBaseURL(url: self.baseURLString ?? "")
-        
-        service = SetTarget(path: endPointString ?? "",
-                            httpMethod: httpMethodString ?? .get,
-                            headers: nil,
-                            task: .requestDefault,
-                            requester: snetworklayer)
-    }
+//    func setConfigureBaseURL(baseURL: String) {
+//        service.setBaseURL(url: baseURL)
+//    }
     
-    func request() {
-        setTargetConfiguration()
-        
-        guard let service = service else { return }
-        service.requester.fetch(target: service) { [weak self] result, response in
+//    func setConfigureEndpoint(endpoint: String) {
+//        
+//    }
+    
+//    func setHTTPMethod(httpMethod: HTTPMethod) {
+//        
+//    }
+    
+    func fetchSNetworkLayer() {
+        service.fetchAPIStruct { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let success):
-                self.delegate?.didRequestResponse(response: String(data: success, encoding: .utf8) ?? "")
+                guard let model = success else { return }
+                self.delegate?.didRequestResponse(response: String(data: model, encoding: .utf8) ?? "")
             case .failure(_):
                 break
             }
