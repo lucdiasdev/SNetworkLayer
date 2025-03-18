@@ -48,8 +48,8 @@ final class ViewModelDemo {
             case .success(let success):
                 guard let model = success else { return }
                 self.delegate?.didRequestResponse(response: String(data: model, encoding: .utf8) ?? "")
-            case .failure(_):
-                break
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }

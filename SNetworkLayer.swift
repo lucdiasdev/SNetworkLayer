@@ -34,19 +34,7 @@ public extension URL {
             self = target.baseURL.appendingPathComponent(target.path)
         }
     }
-    
-//    var queryParameters: [String: String]? {
-//        guard
-//            let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
-//            let queryItems = components.queryItems else { return nil }
-//        return queryItems.reduce(into: [String: String]()) { (result, item) in
-//            result[item.name] = item.value
-//        }
-//    }
 }
-
-//MARK: - Composer
-
 
 //MARK: - Fetcher
 open class SNetworkLayer<T: Target> {

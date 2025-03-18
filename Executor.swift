@@ -8,8 +8,6 @@
 import Foundation
 
 public protocol ExecutorProtocol {
-    //    func execute(urlRequest: URLRequest,
-    //                 completion: @escaping (Data?, URLResponse?, Error?) -> Void)
     func execute(urlRequest: URLRequest,
                  session: URLSession,
                  completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask
@@ -32,15 +30,6 @@ public class Executor: ExecutorProtocol {
         task.resume()
         return task
     }
-    
-//    public func execute(urlRequest: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
-//        let fetch = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-//            self.debug(urlRequest, data, response, error)
-//            completion(data, response, error)
-//        }
-//        
-//        fetch.resume()
-//    }
     
     private func debug(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?) {
         

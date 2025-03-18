@@ -21,7 +21,7 @@ extension APIStruct: Target {
     var path: String {
         switch self {
         case .detailsPokemon:
-            return "pokemon/ditto"
+            return "/v1/users"
         }
     }
     
