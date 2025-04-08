@@ -18,8 +18,12 @@ public class Executor: ExecutorProtocol {
     public init() {}
     
     public func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask {
+        let startTime = Date()
+        
         let task = session.dataTask(with: urlRequest) { data, response, error in
-            self.debug(urlRequest, data, response, error)
+            let endTime = Date()
+            let duration = endTime.timeIntervalSince(startTime)
+            self.debug(urlRequest, data, response, error, duration: duration)
             if let error = error {
                 completion(data, response, FlowError.network(error))
                 return
@@ -31,11 +35,12 @@ public class Executor: ExecutorProtocol {
         return task
     }
     
-    private func debug(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?) {
+    private func debug(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?, duration: TimeInterval) {
         
         print("📲 REQUEST LOG")
         print("🌐 URL: \(request.url?.absoluteString ?? "UNKNOWN")")
         print("▶️ HTTP METHOD: \(request.httpMethod?.uppercased() ?? "UNKNOWN")")
+        print("⏱️ TIME INTERVAL: \(String(format: "%.3f", duration))s")
         
 //        if let requestHeaders = request.allHTTPHeaderFields,
 //            let requestHeadersData = try? JSONSerialization.data(withJSONObject: requestHeaders, options: .prettyPrinted),

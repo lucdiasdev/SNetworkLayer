@@ -13,7 +13,6 @@ public protocol Target {
     var httpMethod: HTTPMethod { get }
     var headerParamaters: [String: String]? { get }
     var task: Task { get }
-    var validation: StatusValidation { get }
 }
 
 public enum HTTPMethod: String {
@@ -35,29 +34,6 @@ public enum Task {
     case bodyParameters(_ parameters: [String: Any], encodingParameters: ParameterEncoding)
 }
 
-public enum StatusValidation: Equatable {
-    
-    /// accept any range of status code 200 ... 299 and trigger error if not.
-    case accept
-    
-    /// accept a custom range of status code  and trigger error if not.
-    case custom(ClosedRange<Int>)
-    
-    /// disabled status code validation
-    case disabled
-    
-    public var rangeStatus: ClosedRange<Int> {
-        switch self {
-        case .accept:
-            return 200 ... 299
-        case .custom(let customRange):
-            return customRange
-        case .disabled:
-            return ClosedRange(uncheckedBounds: (0,0))
-        }
-    }
-}
-
 public extension Target {
     var baseURL: URL {
         guard let url = URL(string: "http://localhost:3000") else {
@@ -65,9 +41,5 @@ public extension Target {
             return URL(fileURLWithPath: "https://pokeapi.co/api/v2/")
         }
         return url
-    }
-    
-    var validation: StatusValidation {
-        .disabled
     }
 }
