@@ -23,15 +23,16 @@ public enum HTTPMethod: String {
     case patch = "PATCH"
 }
 
-public enum ParameterEncoding {
-    case httpBody
+public enum EncodeParameters {
+    case http
     case query
 }
 
 public enum Task {
     case requestDefault
-    case bodyParametersEncodable(Encodable)
-    case bodyParameters(_ parameters: [String: Any], encodingParameters: ParameterEncoding)
+    case requestBodyEncodable(Encodable)
+    case requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)
+    case requestBodyParameters(bodyParameters: [String: Any], urlParameters: [String: Any])
 }
 
 public extension Target {
