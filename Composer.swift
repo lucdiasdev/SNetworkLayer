@@ -8,6 +8,7 @@
 import UIKit
 
 enum ComposerTarget {
+    //TODO: ALTERAR ESSA NOMENCLATURA
     static func requestCreate<T: Target>(_ target: T) throws -> URLRequest {
         var urlRequest = URLRequest(url: URL(target: target))
         urlRequest.allHTTPHeaderFields = target.headerParamaters
@@ -20,15 +21,13 @@ enum ComposerTarget {
         switch target.task {
         case .requestDefault:
             return urlRequest
-            
+            ///
         case .requestBodyEncodable(let encodable):
             return try URLRequestBuilder.encodeBody(encodable, into: urlRequest)
-            
+            ///
         case .requestParameters(let parameters, let encodeParameters):
             return try URLRequestBuilder.encodeParameters(parameters, into: urlRequest, as: encodeParameters)
-            
-        case .requestBodyParameters(let bodyParameters, urlParameters: let urlParameters):
-            return try URLRequestBuilder.encodeBodyParameters(body: bodyParameters, url: urlParameters, into: urlRequest)
+            ///
         }
     }
 }
@@ -42,7 +41,7 @@ enum URLRequestBuilder {
             mutableRequest.httpBody = encoded
             return mutableRequest
         } catch {
-            throw FlowError.invalidRequest(error)
+            throw FlowError.encode(error)
         }
     }
 
@@ -50,25 +49,17 @@ enum URLRequestBuilder {
         var mutableRequest = request
         do {
             try mutableRequest.encode(parameters: parameters, as: encoding)
-            return mutableRequest
-        } catch {
-            throw FlowError.invalidRequest(error)
-        }
-    }
-    
-    static func encodeBodyParameters(body: [String: Any], url: [String: Any], into request: URLRequest) throws -> URLRequest {
-        var mutableRequest = request
-        
-        do {
-            try mutableRequest.encode(parameters: url, as: .query)
             
-            let data = try JSONSerialization.data(withJSONObject: body, options: [])
-            mutableRequest.httpBody = data
-            mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            return mutableRequest
+            if encoding == .bodyWithQuery {
+                let data = try JSONSerialization.data(withJSONObject: parameters, options: [])
+                mutableRequest.httpBody = data
+                mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                return mutableRequest
+            } else {
+                return mutableRequest
+            }
         } catch {
-            throw FlowError.invalidRequest(error)
+            throw FlowError.encode(error)
         }
     }
 }
@@ -84,7 +75,7 @@ private extension URLRequest {
             setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
             httpBody = bodyString.data(using: .utf8)
 
-        case .query:
+        case .query, .bodyWithQuery:
             guard var urlComponents = URLComponents(string: self.url?.absoluteString ?? "") else {
                 throw URLError(.badURL)
             }
@@ -100,6 +91,7 @@ private extension URLRequest {
             }
 
             self.url = updatedURL
+            
         }
     }
 }

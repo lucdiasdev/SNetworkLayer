@@ -24,10 +24,14 @@ public class Executor: ExecutorProtocol {
             let endTime = Date()
             let duration = endTime.timeIntervalSince(startTime)
             self.debug(urlRequest, data, response, error, duration: duration)
-            if let error = error {
-                completion(data, response, FlowError.network(error))
+            
+            ///
+            if let error = error as NSError? {
+                let resolved = error.resolveNetworkError()
+                completion(data, response, FlowError.network(resolved))
                 return
             }
+            
             completion(data, response, nil)
         }
         
@@ -57,11 +61,11 @@ public class Executor: ExecutorProtocol {
             print("\n🚀 RESPONSE LOG")
             switch responseStatusCode.statusCode {
             case 200...299:
-                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) ✅")
+                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) 🟢")
             case 400...505:
-                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) 🆘")
+                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) 🔴")
             default:
-                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) ✴️")
+                print("🔈 STATUSCODE: \(responseStatusCode.statusCode) 🟠")
             }
             
 //            if let responseHeadersData = try? JSONSerialization.data(withJSONObject: httpResponse.allHeaderFields, options: .prettyPrinted),

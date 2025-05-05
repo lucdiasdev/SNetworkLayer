@@ -21,7 +21,7 @@ extension APIStruct: Target {
     var path: String {
         switch self {
         case .detailsPokemon:
-            return "/v1/users"
+            return "v1/users"
         }
     }
     
@@ -48,8 +48,14 @@ extension APIStruct: Target {
 }
 
 final class APIStructService: SNetworkLayer<APIStruct> {
-    func fetchAPIStruct(completion: @escaping (Result<Data?, NetworkError>) -> Void) {
-        fetch(.detailsPokemon) { result, _ in
+    var statusCode: Int?
+    
+    func fetchAPIStruct(completion: @escaping (Result<Data, FlowError>) -> Void) {
+
+        fetch(.detailsPokemon) { result, response in
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            self.statusCode = httpResponse.statusCode
+            
             DispatchQueue.main.async {
                 completion(result)
             }

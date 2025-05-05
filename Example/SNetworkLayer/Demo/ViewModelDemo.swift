@@ -9,47 +9,31 @@
 import Foundation
 import SNetworkLayer
 
-enum CellsType {
-    case textFieldInput
-    case textBodyRequest
-}
-
 protocol ViewModelDemoDelegate: AnyObject {
-    func didRequestResponse(response: String)
+    func didRequestResponseSuccess(response: String, statusCode: Int)
+    func didRequestResponseFailure(error: Error, statusCode: Int)
 }
 
 final class ViewModelDemo {
     
-    //MARK: ViewControllerDemo Rules
-    let cells: [CellsType] = [.textFieldInput, .textBodyRequest]
     weak var delegate: ViewModelDemoDelegate?
     
-    //MARK: SNetworkLayer demo example using
+///MARK:  `para documentacao` mostrando como iniciar o servicing
     var service = APIStructService()
     
-    init() {}
+    init() { }
     
-//    func setConfigureBaseURL(baseURL: String) {
-//        service.setBaseURL(url: baseURL)
-//    }
-    
-//    func setConfigureEndpoint(endpoint: String) {
-//        
-//    }
-    
-//    func setHTTPMethod(httpMethod: HTTPMethod) {
-//        
-//    }
-    
+///MARK:  `para documentacao` mostrando como realizar a ação da request
     func fetchSNetworkLayer() {
         service.fetchAPIStruct { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let success):
-                guard let model = success else { return }
-                self.delegate?.didRequestResponse(response: String(data: model, encoding: .utf8) ?? "")
+                self.delegate?.didRequestResponseSuccess(response: String(data: success, encoding: .utf8) ?? "",
+                                                         statusCode: service.statusCode ?? 000)
             case .failure(let error):
-                print(error.localizedDescription)
+                self.delegate?.didRequestResponseFailure(error: error,
+                                                         statusCode: service.statusCode ?? 000)
             }
         }
     }

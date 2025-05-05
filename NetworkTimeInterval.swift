@@ -7,12 +7,9 @@
 
 import Foundation
 
-public enum NetworkTimeInterval {
-    public static func configTimeInverval(requestTimeout: TimeInterval = 15,
-                                          resourceTimeout: TimeInterval = 60) -> URLSessionConfiguration {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = requestTimeout
-        config.timeoutIntervalForResource = resourceTimeout
-        return config
-    }
+public enum TimeIntervalRequestType: TimeInterval {
+    case short = 15.0
+    case timeDefault = 30.0
+    case shortLong = 60.0
+    case long = 100.0
 }

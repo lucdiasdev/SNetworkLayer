@@ -11,13 +11,109 @@ import SNetworkLayer
 
 final class ViewControllerDemo: UIViewController {
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    private var selectedMethod: HTTPMethod?
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    private lazy var textFieldInputBaseURL: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "base URL API"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
+    
+    private lazy var textFieldInputEndpointURL: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "endpoint API"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
+    
+    private lazy var stackViewHeaderParam: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 4
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var textFieldParamKey: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "header param"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
+    
+    private lazy var textFieldParamValue: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "key param"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        return textField
+    }()
+    
+    private lazy var addButtonHeaderParam: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = 16
+        button.backgroundColor = .systemBlue
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .white
+        button.imageView?.contentMode = .scaleAspectFit
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var stackViewMethodConfig: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 4
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var pickerMethodHttp: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        picker.translatesAutoresizingMaskIntoConstraints = false
+       return picker
+    }()
+    
+    private lazy var pickerMethodHttpTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "HTTP Method"
+        textField.borderStyle = .roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private lazy var textFieldInputBodyInMethodPostSelected: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.placeholder = "send body request POST Method"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.isHidden = true
+        return textField
     }()
     
     private lazy var buttonRequest: UIButton = {
@@ -30,6 +126,65 @@ final class ViewControllerDemo: UIViewController {
         return button
     }()
     
+    private lazy var stackViewStatusCode: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 2
+        stackView.isLayoutMarginsRelativeArrangement = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var titleStatusCodeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.numberOfLines = 0
+        label.text = "Status Code:"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentHuggingPriority(.required, for: .horizontal)
+       return label
+    }()
+    
+    private lazy var resultStatusCodeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.numberOfLines = 0
+        label.text = "Empty"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+       return label
+    }()
+    
+    private lazy var stackViewResponse: UIStackView = {
+        let stackView = UIStackView()
+        stackView.layer.cornerRadius = 8
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .lightGray
+        stackView.isHidden = true
+        return stackView
+    }()
+    
+    private lazy var viewResponse: UIView = {
+        let view = UIView()
+        view.setContentHuggingPriority(.required, for: .vertical)
+        view.setContentCompressionResistancePriority(.required, for: .vertical)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var labelResponse: UILabel = {
+        let label = UILabel()
+        label.font = .monospacedSystemFont(ofSize: 12, weight: .medium)
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private var viewModel: ViewModelDemo
     
     init(viewModel: ViewModelDemo) {
@@ -40,93 +195,168 @@ final class ViewControllerDemo: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Swift Network Layer"
         viewModel.delegate = self
+        view.backgroundColor = .white
         configureView()
-        resgisterCells()
+        configureHttpMethodPicker()
+    }
+    
+    private func addingHeaderParams() {
+        //TODO: ADICIONAR REGRA PARA PARAMETROS
+    }
+    
+    private func configureHttpMethodPicker() {
+        pickerMethodHttpTextField.inputView = pickerMethodHttp
+        pickerMethodHttpTextField.text = HTTPMethod.allCases.first?.rawValue
+        selectedMethod = HTTPMethod.allCases.first
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOutsidePicker))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
     }
     
     func configureView() {
-        view.addSubview(tableView)
-        view.addSubview(buttonRequest)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(textFieldInputBaseURL)
+        contentView.addSubview(textFieldInputEndpointURL)
+        contentView.addSubview(stackViewHeaderParam)
+        stackViewHeaderParam.addArrangedSubview(textFieldParamKey)
+        stackViewHeaderParam.addArrangedSubview(textFieldParamValue)
+        contentView.addSubview(addButtonHeaderParam)
+        contentView.addSubview(stackViewMethodConfig)
+        stackViewMethodConfig.addArrangedSubview(pickerMethodHttpTextField)
+        stackViewMethodConfig.addArrangedSubview(textFieldInputBodyInMethodPostSelected)
+        contentView.addSubview(buttonRequest)
+        contentView.addSubview(stackViewStatusCode)
+        contentView.addSubview(stackViewResponse)
+        stackViewStatusCode.addArrangedSubview(titleStatusCodeLabel)
+        stackViewStatusCode.addArrangedSubview(resultStatusCodeLabel)
+        viewResponse.addSubview(labelResponse)
+        stackViewResponse.addArrangedSubview(viewResponse)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 48),
+            
+            textFieldInputBaseURL.topAnchor.constraint(equalTo: contentView.topAnchor),
+            textFieldInputBaseURL.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textFieldInputBaseURL.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            textFieldInputBaseURL.heightAnchor.constraint(equalToConstant: 48),
+            
+            textFieldInputEndpointURL.topAnchor.constraint(equalTo: textFieldInputBaseURL.bottomAnchor, constant: 8),
+            textFieldInputEndpointURL.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            textFieldInputEndpointURL.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            textFieldInputEndpointURL.heightAnchor.constraint(equalToConstant: 48),
+            
+            textFieldParamKey.heightAnchor.constraint(equalToConstant: 48),
+            textFieldParamValue.heightAnchor.constraint(equalToConstant: 48),
+            
+            stackViewHeaderParam.topAnchor.constraint(equalTo: textFieldInputEndpointURL.bottomAnchor, constant: 8),
+            stackViewHeaderParam.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+            addButtonHeaderParam.heightAnchor.constraint(equalToConstant: 32),
+            addButtonHeaderParam.widthAnchor.constraint(equalToConstant: 32),
+            addButtonHeaderParam.leadingAnchor.constraint(equalTo: stackViewHeaderParam.trailingAnchor, constant: 8),
+            addButtonHeaderParam.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            addButtonHeaderParam.centerYAnchor.constraint(equalTo: stackViewHeaderParam.centerYAnchor),
+            
+            stackViewMethodConfig.topAnchor.constraint(equalTo: stackViewHeaderParam.bottomAnchor, constant: 8),
+            stackViewMethodConfig.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackViewMethodConfig.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            pickerMethodHttpTextField.heightAnchor.constraint(equalToConstant: 48),
+            textFieldInputBodyInMethodPostSelected.heightAnchor.constraint(equalToConstant: 48),
+            
+            buttonRequest.topAnchor.constraint(equalTo: stackViewMethodConfig.bottomAnchor, constant: 16),
+            buttonRequest.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            buttonRequest.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonRequest.heightAnchor.constraint(equalToConstant: 48),
-            buttonRequest.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            buttonRequest.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            buttonRequest.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24)
+            
+            stackViewStatusCode.topAnchor.constraint(equalTo: buttonRequest.bottomAnchor, constant: 16),
+            stackViewStatusCode.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackViewStatusCode.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            
+            stackViewResponse.topAnchor.constraint(equalTo: stackViewStatusCode.bottomAnchor, constant: 16),
+            stackViewResponse.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackViewResponse.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackViewResponse.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -48),
+            
+            labelResponse.topAnchor.constraint(equalTo: viewResponse.topAnchor, constant: 4),
+            labelResponse.leadingAnchor.constraint(equalTo: viewResponse.leadingAnchor, constant: 4),
+            labelResponse.trailingAnchor.constraint(equalTo: viewResponse.trailingAnchor, constant: -4),
+            labelResponse.bottomAnchor.constraint(equalTo: viewResponse.bottomAnchor, constant: -4)
         ])
     }
     
-    func resgisterCells() {
-        tableView.register(TextFieldsCell.self, forCellReuseIdentifier: String(describing: TextFieldsCell.self))
-        tableView.register(TextBodyRequestCell.self, forCellReuseIdentifier: String(describing: TextBodyRequestCell.self))
+    @objc private func handleTapOutsidePicker(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
     @objc private func buttonRequestAction() {
+        //TODO: apresentar um activity
         viewModel.fetchSNetworkLayer()
+        //        stackViewResponse.isHidden = false
     }
     
 }
 
-extension ViewControllerDemo: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cells.count
+extension ViewControllerDemo: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch viewModel.cells[indexPath.row] {
-        case .textFieldInput:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextFieldsCell.self),
-                                                           for: indexPath) as? TextFieldsCell else {
-                return .init()
-            }
-            
-            cell.delegate = self
-            return cell
-            
-        case .textBodyRequest:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextBodyRequestCell.self),
-                                                           for: indexPath) as? TextBodyRequestCell else {
-                return .init()
-            }
-            
-            return cell
-        }
-    }
-}
 
-extension ViewControllerDemo: TextFieldsCellDelegate {
-    func didUpdateTextField(value: String, type: TextFieldType) {
-        switch type {
-        case .baseURL:
-//            viewModel.setConfigureBaseURL(baseURL: value)
-            break
-        case .endpointURL:
-            break
-            //viewModel.setConfigureEndpoint(endpoint: value)
-        case .httpMethod:
-            break
-            //viewModel.setHTTPMethod(httpMethod: .get) //TODO: corrigir argumento para receber input
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return HTTPMethod.allCases.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return HTTPMethod.allCases[row].rawValue
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedMethod = HTTPMethod.allCases[row]
+        pickerMethodHttpTextField.text = selectedMethod?.rawValue
+        pickerMethodHttpTextField.resignFirstResponder()
+        if selectedMethod?.rawValue == "POST" {
+            textFieldInputBodyInMethodPostSelected.isHidden = false
+        } else {
+            textFieldInputBodyInMethodPostSelected.isHidden = true
         }
     }
 }
 
 extension ViewControllerDemo: ViewModelDemoDelegate {
-    func didRequestResponse(response: String) {
+    func didRequestResponseSuccess(response: String, statusCode: Int) {
         DispatchQueue.main.async {
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? TextBodyRequestCell else { return }
-            let text = response.replacingOccurrences(of: #"\"#, with: "")
-            cell.textBodyRequestLabel.text = text
-            self.tableView.reloadData()
+            self.stackViewResponse.isHidden = false
+            self.resultStatusCodeLabel.text = "\(statusCode)"
+            self.resultStatusCodeLabel.textColor = .green
+            if response.isEmpty {
+                self.labelResponse.text = "empty response body"
+                return
+            }
+            self.labelResponse.text = response.replacingOccurrences(of: #"\"#, with: "")
+        }
+    }
+    
+    func didRequestResponseFailure(error: Error, statusCode: Int) {
+        DispatchQueue.main.async {
+            self.resultStatusCodeLabel.text = "\(statusCode)"
+            self.resultStatusCodeLabel.textColor = .red
+            self.labelResponse.text = error.localizedDescription
         }
     }
 }

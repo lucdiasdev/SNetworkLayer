@@ -15,7 +15,7 @@
 		AF62481F2D5A4338009E485B /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62481E2D5A4338009E485B /* Target.swift */; };
 		AF6248232D5A440E009E485B /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248222D5A440E009E485B /* Executor.swift */; };
 		AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248242D5A4476009E485B /* SNetworkLayer.swift */; };
-		AF6248272D5A4AE8009E485B /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248262D5A4AE8009E485B /* ErrorHandler.swift */; };
+		AF6248272D5A4AE8009E485B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248262D5A4AE8009E485B /* NetworkError.swift */; };
 		AF62485B2D805C92009E485B /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62485A2D805C92009E485B /* Composer.swift */; };
 		AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */; };
 		AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */; };
@@ -70,7 +70,7 @@
 		AF62481E2D5A4338009E485B /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkLayer.swift; sourceTree = "<group>"; };
-		AF6248262D5A4AE8009E485B /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		AF6248262D5A4AE8009E485B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
 		AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataTask.swift; sourceTree = "<group>"; };
 		AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTimeInterval.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 				AF62485A2D805C92009E485B /* Composer.swift */,
 				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
 				AF62481E2D5A4338009E485B /* Target.swift */,
-				AF6248262D5A4AE8009E485B /* ErrorHandler.swift */,
+				AF6248262D5A4AE8009E485B /* NetworkError.swift */,
 				AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */,
 				AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */,
 				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
@@ -396,7 +396,7 @@
 				AF62481F2D5A4338009E485B /* Target.swift in Sources */,
 				AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */,
 				AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */,
-				AF6248272D5A4AE8009E485B /* ErrorHandler.swift in Sources */,
+				AF6248272D5A4AE8009E485B /* NetworkError.swift in Sources */,
 				AF6248232D5A440E009E485B /* Executor.swift in Sources */,
 				AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */,
 				AF62485B2D805C92009E485B /* Composer.swift in Sources */,

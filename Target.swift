@@ -15,7 +15,7 @@ public protocol Target {
     var task: Task { get }
 }
 
-public enum HTTPMethod: String {
+public enum HTTPMethod: String, CaseIterable {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
@@ -26,15 +26,16 @@ public enum HTTPMethod: String {
 public enum EncodeParameters {
     case http
     case query
+    case bodyWithQuery
 }
 
 public enum Task {
     case requestDefault
     case requestBodyEncodable(Encodable)
     case requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)
-    case requestBodyParameters(bodyParameters: [String: Any], urlParameters: [String: Any])
 }
 
+//TODO: ALTERAR ISSO
 public extension Target {
     var baseURL: URL {
         guard let url = URL(string: "http://localhost:3000") else {
