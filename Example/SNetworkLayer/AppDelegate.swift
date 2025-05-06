@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SNetworkLayerConfig.messageProvider = CustomErrorMessageProvider()
         
         let viewModel = ViewModelDemo()
-        let viewController = ViewControllerDemo(viewModel: viewModel)
+        let viewController = ViewControllerDemo()
         let navigationController = UINavigationController(rootViewController: viewController)
         
         window?.rootViewController = navigationController

@@ -10,7 +10,7 @@ import Foundation
 import SNetworkLayer
 
 enum APIStruct {
-    case detailsPokemon
+    case testUrl
 }
 
 extension APIStruct: Target {    
@@ -20,45 +20,29 @@ extension APIStruct: Target {
     
     var path: String {
         switch self {
-        case .detailsPokemon:
-            return "v1/users"
+        case .testUrl:
+            return "endpoint/test"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .detailsPokemon:
+        case .testUrl:
             return .get
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .detailsPokemon:
+        case .testUrl:
             return nil
         }
     }
     
     var task: Task {
         switch self {
-        case .detailsPokemon:
+        case .testUrl:
             return .requestDefault
-        }
-    }
-}
-
-final class APIStructService: SNetworkLayer<APIStruct> {
-    var statusCode: Int?
-    
-    func fetchAPIStruct(completion: @escaping (Result<Data, FlowError>) -> Void) {
-
-        fetch(.detailsPokemon) { result, response in
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            self.statusCode = httpResponse.statusCode
-            
-            DispatchQueue.main.async {
-                completion(result)
-            }
         }
     }
 }
