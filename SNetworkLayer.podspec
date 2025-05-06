@@ -28,9 +28,9 @@ This my first pod, framework network requester with concurrency applied/classic
 
   s.ios.deployment_target = '14.0'
   s.swift_version = '5.0'
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
-  s.source_files = 'SNetworkLayer/Classes/**/*'
+  s.source_files = '*.swift'
   
   # s.resource_bundles = {
   #   'SNetworkLayer' => ['SNetworkLayer/Assets/*.png']
