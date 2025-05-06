@@ -43,6 +43,32 @@ final class ViewControllerDemo: UIViewController {
         return textField
     }()
     
+    private lazy var stackViewTaskConfig: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 4
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var pickerMethodTask: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        picker.translatesAutoresizingMaskIntoConstraints = false
+       return picker
+    }()
+    
+    private lazy var pickerMethodTaskTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Task Method"
+        textField.borderStyle = .roundedRect
+        textField.delegate = self
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
     private lazy var stackViewHeaderParam: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -102,6 +128,7 @@ final class ViewControllerDemo: UIViewController {
         let textField = UITextField()
         textField.placeholder = "HTTP Method"
         textField.borderStyle = .roundedRect
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -203,17 +230,26 @@ final class ViewControllerDemo: UIViewController {
         view.backgroundColor = .white
         configureView()
         configureHttpMethodPicker()
+        configureTaskMethodPicker()
+        tapOutsidePicker()
     }
     
     private func addingHeaderParams() {
-        //TODO: ADICIONAR REGRA PARA PARAMETROS
+        viewModel.addingHeaderParams()
     }
     
     private func configureHttpMethodPicker() {
         pickerMethodHttpTextField.inputView = pickerMethodHttp
         pickerMethodHttpTextField.text = HTTPMethod.allCases.first?.rawValue
         selectedMethod = HTTPMethod.allCases.first
-        
+    }
+    
+    private func configureTaskMethodPicker() {
+        pickerMethodTaskTextField.inputView = pickerMethodTask
+        pickerMethodTaskTextField.text = viewModel.taskPickerItems.first?.label
+    }
+    
+    private func tapOutsidePicker() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOutsidePicker))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -224,10 +260,12 @@ final class ViewControllerDemo: UIViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(textFieldInputBaseURL)
         contentView.addSubview(textFieldInputEndpointURL)
-        contentView.addSubview(stackViewHeaderParam)
-        stackViewHeaderParam.addArrangedSubview(textFieldParamKey)
-        stackViewHeaderParam.addArrangedSubview(textFieldParamValue)
-        contentView.addSubview(addButtonHeaderParam)
+        contentView.addSubview(stackViewTaskConfig)
+//        stackViewHeaderParam.addArrangedSubview(textFieldParamKey)
+//        stackViewHeaderParam.addArrangedSubview(textFieldParamValue)
+        stackViewTaskConfig.addArrangedSubview(pickerMethodTaskTextField)
+//        stackViewTaskConfig.addArrangedSubview(stackViewHeaderParam)
+//        contentView.addSubview(addButtonHeaderParam)
         contentView.addSubview(stackViewMethodConfig)
         stackViewMethodConfig.addArrangedSubview(pickerMethodHttpTextField)
         stackViewMethodConfig.addArrangedSubview(textFieldInputBodyInMethodPostSelected)
@@ -261,19 +299,25 @@ final class ViewControllerDemo: UIViewController {
             textFieldInputEndpointURL.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             textFieldInputEndpointURL.heightAnchor.constraint(equalToConstant: 48),
             
-            textFieldParamKey.heightAnchor.constraint(equalToConstant: 48),
-            textFieldParamValue.heightAnchor.constraint(equalToConstant: 48),
+//            textFieldParamKey.heightAnchor.constraint(equalToConstant: 48),
+//            textFieldParamValue.heightAnchor.constraint(equalToConstant: 48),
             
-            stackViewHeaderParam.topAnchor.constraint(equalTo: textFieldInputEndpointURL.bottomAnchor, constant: 8),
-            stackViewHeaderParam.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackViewTaskConfig.topAnchor.constraint(equalTo: textFieldInputEndpointURL.bottomAnchor, constant: 8),
+            stackViewTaskConfig.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackViewTaskConfig.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            addButtonHeaderParam.heightAnchor.constraint(equalToConstant: 32),
-            addButtonHeaderParam.widthAnchor.constraint(equalToConstant: 32),
-            addButtonHeaderParam.leadingAnchor.constraint(equalTo: stackViewHeaderParam.trailingAnchor, constant: 8),
-            addButtonHeaderParam.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            addButtonHeaderParam.centerYAnchor.constraint(equalTo: stackViewHeaderParam.centerYAnchor),
+            pickerMethodTaskTextField.heightAnchor.constraint(equalToConstant: 48),
             
-            stackViewMethodConfig.topAnchor.constraint(equalTo: stackViewHeaderParam.bottomAnchor, constant: 8),
+//            stackViewHeaderParam.topAnchor.constraint(equalTo: textFieldInputEndpointURL.bottomAnchor, constant: 8),
+//            stackViewHeaderParam.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            
+//            addButtonHeaderParam.heightAnchor.constraint(equalToConstant: 32),
+//            addButtonHeaderParam.widthAnchor.constraint(equalToConstant: 32),
+//            addButtonHeaderParam.leadingAnchor.constraint(equalTo: stackViewTaskConfig.trailingAnchor, constant: 8),
+//            addButtonHeaderParam.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+//            addButtonHeaderParam.centerYAnchor.constraint(equalTo: stackViewTaskConfig.centerYAnchor),
+            
+            stackViewMethodConfig.topAnchor.constraint(equalTo: stackViewTaskConfig.bottomAnchor, constant: 8),
             stackViewMethodConfig.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackViewMethodConfig.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
@@ -319,22 +363,46 @@ extension ViewControllerDemo: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return HTTPMethod.allCases.count
+        if pickerView == pickerMethodHttp {
+            return HTTPMethod.allCases.count
+        } else if pickerView == pickerMethodTask {
+            return viewModel.taskPickerItems.count
+        }
+        return 0
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return HTTPMethod.allCases[row].rawValue
+        if pickerView == pickerMethodHttp {
+            return HTTPMethod.allCases[row].rawValue
+        } else if pickerView == pickerMethodTask {
+            return viewModel.taskPickerItems[row].label
+        }
+        return nil
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedMethod = HTTPMethod.allCases[row]
-        pickerMethodHttpTextField.text = selectedMethod?.rawValue
-        pickerMethodHttpTextField.resignFirstResponder()
-        if selectedMethod?.rawValue == "POST" {
-            textFieldInputBodyInMethodPostSelected.isHidden = false
-        } else {
-            textFieldInputBodyInMethodPostSelected.isHidden = true
+        if pickerView == pickerMethodHttp {
+            selectedMethod = HTTPMethod.allCases[row]
+            pickerMethodHttpTextField.text = selectedMethod?.rawValue
+            pickerMethodHttpTextField.resignFirstResponder()
+            if selectedMethod?.rawValue == "POST" {
+                textFieldInputBodyInMethodPostSelected.isHidden = false
+            } else {
+                textFieldInputBodyInMethodPostSelected.isHidden = true
+            }
         }
+        
+        if pickerView == pickerMethodTask {
+//            selectedTask =
+//            pickerMethodTaskTextField.text =
+            pickerMethodTaskTextField.resignFirstResponder()
+        }
+    }
+}
+
+extension ViewControllerDemo: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
 }
 
