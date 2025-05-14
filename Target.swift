@@ -34,14 +34,3 @@ public enum Task {
     case requestBodyEncodable(Encodable)
     case requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)
 }
-
-//TODO: ALTERAR ISSO
-public extension Target {
-    var baseURL: URL {
-        guard let url = URL(string: "http://localhost:3000") else {
-            assertionFailure("Invalid static URL string: https://pokeapi.co/api/v2/")
-            return URL(fileURLWithPath: "https://pokeapi.co/api/v2/")
-        }
-        return url
-    }
-}

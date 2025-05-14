@@ -51,7 +51,7 @@ public enum NetworkError: Error, LocalizedError {
     case cancelConnectedNetwork
 }
 
-/// MARK:  abastração para resolver erros comuns descritos acima
+/// abastração para resolver erros de rede nativo comuns descritos acima
 extension Error {
     func resolveNetworkError() -> NetworkError {
         let nsError = self as NSError
@@ -71,22 +71,22 @@ extension Error {
 }
 
 
-//TODO: ALTERAR ISSO
-public protocol NetworkErrorMessageProvider {
-    func message(for error: NetworkError) -> String
-}
-
-public enum SNetworkLayerConfig {
-    public static var messageProvider: NetworkErrorMessageProvider?
-}
-
-public extension FlowError {
-    var userMessage: String? {
-        switch self {
-        case .network(let error):
-            return SNetworkLayerConfig.messageProvider?.message(for: error)
-        default:
-            return nil
-        }
-    }
-}
+//TODO: ALTERAR ISSO, isso serve para que?
+//public protocol NetworkErrorMessageProvider {
+//    func message(for error: NetworkError) -> String
+//}
+//
+//public enum SNetworkLayerConfig {
+//    public static var messageProvider: NetworkErrorMessageProvider?
+//}
+//
+//public extension FlowError {
+//    var userMessage: String? {
+//        switch self {
+//        case .network(let error):
+//            return SNetworkLayerConfig.messageProvider?.message(for: error)
+//        default:
+//            return nil
+//        }
+//    }
+//}

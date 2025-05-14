@@ -8,21 +8,8 @@
 import Foundation
 import UIKit
 
-//TODO: ALTERAR ISSO
-public extension URL {
-    init<T: Target>(target: T) {
-        if target.path.isEmpty {
-            self = target.baseURL
-        } else {
-            self = target.baseURL.appendingPathComponent(target.path)
-        }
-    }
-}
-
 open class SNetworkLayer<T: Target> {
     
-//TODO: ALTERAR ISSO
-//    var baseURL: URL?
     private let urlSession: URLSession
     private let executor: ExecutorProtocol
     
@@ -31,6 +18,11 @@ open class SNetworkLayer<T: Target> {
         self.urlSession = URLSession(configuration: urlSessionConfiguration)
     }
     
+    /// inicializador que encapsula uma configuração para urlSession
+    /// caso queira personalizar alguma dessas configurações, basta sobrescrever os parametros desejados
+    /// suponha que voce tenha sua classe de service conforme construção utilizando o SNetworkLayer:
+    /// - ex.: `Class ExampleService: SNetworkLayer<ExampleAPI>`
+    /// ao inicializar a instancia do seu service você utiliza `let service = ExampleService(requestTimeOut: .long, resourceTimeOut: .short)` ou alguma propriedade a sua escolha
     public convenience init(requestTimeOut: TimeIntervalRequestType = .short, resourceTimeOut: TimeIntervalRequestType = .long,
                             urlCache: URLCache? = nil, urlCredentialStorage: URLCredentialStorage? = nil,
                             httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy = .always,
@@ -43,7 +35,6 @@ open class SNetworkLayer<T: Target> {
         config.timeoutIntervalForRequest = requestTimeOut.rawValue
         /// `resourceTimeout` timeout total para baixar todo o recurso
         config.timeoutIntervalForResource = resourceTimeOut.rawValue
-        
         /// `urlCache` Desabilita o cache da URLSession
         config.urlCache = urlCache
         /// `urlCredentialStorage` Desativa o armazenamento automático de credenciais (como login/senha)
@@ -62,6 +53,9 @@ open class SNetworkLayer<T: Target> {
                          _ urlSession: URLSession,
                          completion: @escaping (_ data: Data?, _ request: URLRequest?, _ response: URLResponse?, _ error: FlowError?) -> Void) -> URLSessionDataTask? {
         do {
+            /// `Composer` retorna um `URLSession` a partir do `Target`
+            /// cria a url a ser utilizada com seus devidos parametros
+            /// promovento o encapsulamento de headers, method http e body
             let request = try ComposerTarget.requestCreate(target)
             
             return self.executor.execute(urlRequest: request, session: urlSession) { data, response, error in

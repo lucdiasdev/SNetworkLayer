@@ -23,10 +23,10 @@ public class Executor: ExecutorProtocol {
         let task = session.dataTask(with: urlRequest) { data, response, error in
             let endTime = Date()
             let duration = endTime.timeIntervalSince(startTime)
-            self.debug(urlRequest, data, response, error, duration: duration)
+            self.log(urlRequest, data, response, error, duration: duration)
             
-            ///
             if let error = error as NSError? {
+                /// converte erro de rede nativo (`NSError`) para um modelo de erro customizado (`FlowError`)
                 let resolved = error.resolveNetworkError()
                 completion(data, response, FlowError.network(resolved))
                 return
@@ -39,7 +39,7 @@ public class Executor: ExecutorProtocol {
         return task
     }
     
-    private func debug(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?, duration: TimeInterval) {
+    private func log(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?, duration: TimeInterval) {
         
         print("📲 REQUEST LOG")
         print("🌐 URL: \(request.url?.absoluteString ?? "UNKNOWN")")
