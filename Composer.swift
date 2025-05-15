@@ -24,11 +24,6 @@ enum ComposerTarget {
         urlRequest.allHTTPHeaderFields = target.headerParamaters
         urlRequest.httpMethod = target.httpMethod.rawValue
         
-        /// Define o header padrão `Content-Type` como `application/json` caso ele não tenha sido definido pelo Target
-        if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
-        
         switch target.task {
         case .requestDefault:
             return urlRequest
@@ -61,8 +56,15 @@ enum ComposerTarget {
 }
 
 enum URLRequestBuilder {
-    static func encodeBody(_ encodable: Encodable, into request: URLRequest) throws -> URLRequest {
+    static func encodeBody(_ encodable: Encodable, into request: URLRequest) throws -> URLRequest { //AQUI HTTP
         var mutableRequest = request
+        
+        /// define o header padrão `Content-Type` como `application/json` caso ele não tenha sido definido pelo Target
+        /// o `Content-Type` informa ao servidor como interpretar o corpo da requisição
+        if mutableRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+            mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
+        
         let encoder = JSONEncoder()
         do {
             let encoded = try encoder.encode(encodable)
@@ -84,8 +86,14 @@ enum URLRequestBuilder {
         }
     }
     
-    static func encodeBodyAndParameters(_ bodyParameters: [String: Any], _ queryParameters: [String: Any]?, into request: URLRequest) throws -> URLRequest {
+    static func encodeBodyAndParameters(_ bodyParameters: [String: Any], _ queryParameters: [String: Any]?, into request: URLRequest) throws -> URLRequest { //AQUI HTTP
         var mutableRequest = request
+        
+        /// define o header padrão `Content-Type` como `application/json` caso ele não tenha sido definido pelo Target
+        /// o `Content-Type` informa ao servidor como interpretar o corpo da requisição
+        if mutableRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+            mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         
         if let queryParameters = queryParameters {
             mutableRequest = try encodeParameters(queryParameters, into: mutableRequest, as: .query)
