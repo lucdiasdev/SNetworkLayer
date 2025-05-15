@@ -51,7 +51,7 @@ open class SNetworkLayer<T: Target> {
     
     private func composer(_ target: T,
                          _ urlSession: URLSession,
-                         completion: @escaping (_ data: Data?, _ request: URLRequest?, _ response: URLResponse?, _ error: FlowError?) -> Void) -> URLSessionDataTask? {
+                         completion: @escaping (_ data: Data?, _ request: URLRequest?, _ response: URLResponse?, _ error: FlowError?) -> Void) -> NetworkDataTask? {
         do {
             /// `Composer` retorna um `URLSession` a partir do `Target`
             /// cria a url a ser utilizada com seus devidos parametros
@@ -219,7 +219,7 @@ open class SNetworkLayer<T: Target> {
             
         }
         
-        return NetworkDataTask(task: task)
+        return task
     }
 
 }

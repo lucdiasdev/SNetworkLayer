@@ -10,14 +10,14 @@ import Foundation
 public protocol ExecutorProtocol {
     func execute(urlRequest: URLRequest,
                  session: URLSession,
-                 completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask
+                 completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> NetworkDataTask
 }
 
 public class Executor: ExecutorProtocol {
     
     public init() {}
     
-    public func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> URLSessionDataTask {
+    public func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> NetworkDataTask {
         let startTime = Date()
         
         let task = session.dataTask(with: urlRequest) { data, response, error in
@@ -35,12 +35,14 @@ public class Executor: ExecutorProtocol {
             completion(data, response, nil)
         }
         
-        task.resume()
-        return task
+        let networkDataTask = NetworkDataTask(task: task)
+        networkDataTask.resume()
+        return networkDataTask
     }
     
     private func log(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?, duration: TimeInterval) {
         
+        print("=========START REQUEST LOG=========")
         print("📲 REQUEST LOG")
         print("🌐 URL: \(request.url?.absoluteString ?? "UNKNOWN")")
         print("▶️ HTTP METHOD: \(request.httpMethod?.uppercased() ?? "UNKNOWN")")
@@ -52,10 +54,11 @@ public class Executor: ExecutorProtocol {
 //            print("↗️ HEADERS:\n\(requestHeadersString)")
 //        }
         
-//        if let requestBodyData = request.httpBody,
-//            let requestBody = String(data: requestBodyData, encoding: .utf8) {
-//            print("↗️ BODY: \n\(requestBody)")
-//        }
+        if let requestBodyData = request.httpBody,
+            let requestBody = String(data: requestBodyData, encoding: .utf8),
+            !requestBody.isEmpty {
+                print("🙆🏻 BODY: \n\(requestBody)")
+            }
         
         if let responseStatusCode = response as? HTTPURLResponse {
             print("\n🚀 RESPONSE LOG")
@@ -85,6 +88,6 @@ public class Executor: ExecutorProtocol {
 //            print("\n❌ DESCRIPTION: \(urlError.localizedDescription)\n")
 //        }
         
-//        print("======== END OF: \(uuid) ========\n\n")
+        print("=========END REQUEST LOG=========")
     }
 }
