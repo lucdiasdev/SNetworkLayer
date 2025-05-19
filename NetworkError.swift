@@ -51,7 +51,8 @@ public enum NetworkError: Error, LocalizedError {
     case cancelConnectedNetwork
 }
 
-/// abastração para resolver erros de rede nativo comuns descritos acima
+/// abstração para mapear erros de rede nativos (`NSError`) em erros de domínio customizados (`NetworkError`)
+/// essa função cobre casos comuns e retorna `.unknown` quando o erro não se encaixa em nenhum dos casos tratados.
 extension Error {
     func resolveNetworkError() -> NetworkError {
         let nsError = self as NSError
@@ -70,23 +71,22 @@ extension Error {
     }
 }
 
+//TODO: tentar adicionar alem das mensagem dos erros nativos tentar adicionar o erro customizado de backend (CustomNetworkError da AppDelegate)
+public protocol NetworkErrorMessageProvider {
+    func message(for error: NetworkError) -> String
+}
 
-//TODO: ALTERAR ISSO, isso serve para que?
-//public protocol NetworkErrorMessageProvider {
-//    func message(for error: NetworkError) -> String
-//}
-//
-//public enum SNetworkLayerConfig {
-//    public static var messageProvider: NetworkErrorMessageProvider?
-//}
-//
-//public extension FlowError {
-//    var userMessage: String? {
-//        switch self {
-//        case .network(let error):
-//            return SNetworkLayerConfig.messageProvider?.message(for: error)
-//        default:
-//            return nil
-//        }
-//    }
-//}
+public enum SNetworkLayerConfig {
+    public static var messageProvider: NetworkErrorMessageProvider?
+}
+
+public extension FlowError {
+    var userMessage: String? {
+        switch self {
+        case .network(let error):
+            return SNetworkLayerConfig.messageProvider?.message(for: error)
+        default:
+            return nil
+        }
+    }
+}

@@ -18,8 +18,7 @@ extension URL {
 }
 
 enum ComposerTarget {
-    //TODO: ALTERAR ESSA NOMENCLATURA
-    static func requestCreate<T: Target>(_ target: T) throws -> URLRequest {
+    static func composeRequest<T: Target>(_ target: T) throws -> URLRequest {
         var urlRequest = URLRequest(url: URL(target: target))
         urlRequest.allHTTPHeaderFields = target.headerParamaters
         urlRequest.httpMethod = target.httpMethod.rawValue

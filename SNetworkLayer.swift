@@ -43,7 +43,8 @@ open class SNetworkLayer<T: Target> {
         config.httpCookieAcceptPolicy = httpCookieAcceptPolicy
         /// `requestCachePolicy` Garante que a sessão ignora qualquer cache local ou remoto ao fazer requisições.``
         config.requestCachePolicy = cachePolicy
-        /// `waitsForConnectivity` URLSession espera que a conectividade volte antes de iniciar a requisição (true) | a requisição falha imediatamente com erro do tipo .notConnectedToInternet (false)
+        /// `waitsForConnectivity` URLSession espera que a conectividade volte antes de iniciar a requisição (true)
+        /// a requisição falha imediatamente com erro do tipo .notConnectedToInternet (false)
         config.waitsForConnectivity = waitsForConnectivity
 
         self.init(urlSessionConfiguration: config)
@@ -56,7 +57,7 @@ open class SNetworkLayer<T: Target> {
             /// `Composer` retorna um `URLSession` a partir do `Target`
             /// cria a url a ser utilizada com seus devidos parametros
             /// promovento o encapsulamento de headers, method http e body
-            let request = try ComposerTarget.requestCreate(target)
+            let request = try ComposerTarget.composeRequest(target)
             
             return self.executor.execute(urlRequest: request, session: urlSession) { data, response, error in
                 completion(data, request, response, error)
@@ -183,7 +184,7 @@ open class SNetworkLayer<T: Target> {
         let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
             guard let _ = self else { return }
             
-            // 🛑 Erro nativo (sem internet, timeout etc)
+            /// erro nativo `NetworkError` (sem internet, timeout e etc)
             if let error = error {
                 if case let FlowError.network(networkError) = error {
                     completion?(.failure(.network(networkError)), response)
@@ -200,7 +201,7 @@ open class SNetworkLayer<T: Target> {
             
             let statusCode = httpResponse.statusCode
             
-            // ✅ Sucesso (status 2xx)
+            /// sucesso (status 2xx)
             if (200...299).contains(statusCode) {
                 if let data = data {
                     completion?(.success(data), response)
@@ -210,7 +211,7 @@ open class SNetworkLayer<T: Target> {
                 return
             }
             
-            // ⚠️ Fallback de error (nao existe um custom error neste fetch)
+            /// fallback de error (nao existe um `custom error` neste fetch)
             if let data = data {
                 completion?(.failure(.apiError(data)), response)
             } else {

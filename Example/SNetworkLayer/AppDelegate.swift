@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        SNetworkLayerConfig.messageProvider = CustomErrorMessageProvider()
+//        SNetworkLayerConfig.messageProvider = CustomErrorMessageProvider()
         
         let viewModel = ViewModelDemo()
         let viewController = ViewControllerDemo()
@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+
+
 
 ///MARK:  `para documentacao` como utilizar para mostrar os erros personalizados de network failure
 final class CustomErrorMessageProvider: NetworkErrorMessageProvider {
