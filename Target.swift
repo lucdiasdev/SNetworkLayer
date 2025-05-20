@@ -26,22 +26,26 @@ public enum HTTPMethod: String, CaseIterable {
 public enum EncodeParameters {
     case http
     case query
-    case bodyWithQuery
 }
 
 public enum Task {
+    /// monta uma requisição simples sem dados adicionais.
     case requestDefault
+    
+    /// monta uma requisição com um ​​corpo `body` de solicitação definido com o tipo `Encodable`
     case requestBodyEncodable(Encodable)
+    
+    /// monta uma requisição com parametros de URL como `query string`
+    /// definindo o `EncodeParameters` como `.query`
+    /// e tambem defini uma requisição como `x-www-form-urlencoded` definindo o `EncodeParameters` como `.http`
     case requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)
-}
-
-//TODO: ALTERAR ISSO
-public extension Target {
-    var baseURL: URL {
-        guard let url = URL(string: "http://localhost:3000") else {
-            assertionFailure("Invalid static URL string: https://pokeapi.co/api/v2/")
-            return URL(fileURLWithPath: "https://pokeapi.co/api/v2/")
-        }
-        return url
-    }
+    
+    /// monta uma requisição com um corpo `body` de solicitação definido com o tipo `Encodable`
+    /// e tamabem permite passar parâmetros de URL como `query string` ao mesmo tempo
+    case requestBodyEncodableWithParameters(Encodable, queryParameters: [String: Any])
+    
+    /// monta uma requisição com um conjunto de corpos do tipo dicionário
+    /// permite passar parâmetros como corpo `body` da requisição
+    /// e tambem parâmetros de URL como `query string` ao mesmo tempo
+    case requestBodyAndQueryParameters(bodyParameters: [String: Any], queryParameters: [String: Any]?)
 }
