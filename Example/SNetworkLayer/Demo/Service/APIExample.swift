@@ -15,9 +15,9 @@ enum APIExample {
 
 extension APIExample: Target {
     var baseURL: URL {
-        guard let url = URL(string: "http://localhost:3000/") else {
-            assertionFailure("Invalid static URL string: http://localhost:3000/")
-            return URL(fileURLWithPath: "http://localhost:3000/")
+        guard let url = URL(string: "") else {
+            assertionFailure("Invalid static URL string: ")
+            return URL(fileURLWithPath: "")
         }
         return url
     }

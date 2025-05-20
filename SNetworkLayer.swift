@@ -137,7 +137,11 @@ open class SNetworkLayer<T: Target> {
 //            
 //            // 🛑 Erro nativo (sem internet, timeout etc)
 //            if let error = error {
-//                completion?(.failure(.network(error)), response)
+//                if case let FlowError.network(networkError) = error {
+//                    completion?(.failure(.network(networkError)), response)
+//                } else {
+//                    completion?(.failure(.network(.unknown)), response)
+//                }
 //                return
 //            }
 //            
@@ -162,18 +166,15 @@ open class SNetworkLayer<T: Target> {
 //            if let data = data, let errorType = errorType {
 //                do {
 //                    let decodedError = try self.decode(data, to: E.self)
-//                    completion?(.failure(.apiError(decodedError, statusCode: statusCode)), response)
+//                    completion?(.failure(.apiCustomError(decodedError)), response)
 //                    return
 //                } catch {
-//                    debugPrint("🪵 Falha ao decodificar erro customizado:", error)
+//                    completion?(.failure(.noData), response)
 //                }
 //            }
-//            
-//            // ⚠️ Fallback
-//            completion?(.failure(.unhandled(data, statusCode: statusCode)), response)
 //        }
 //        
-//        return NetworkDataTask(task: task)
+//        return task
 //    }
     
     //MARK: - WITH DATA AND ERROR DEFAULT
