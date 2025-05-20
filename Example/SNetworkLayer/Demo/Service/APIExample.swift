@@ -1,5 +1,5 @@
 //
-//  APIStruct.swift
+//  APIExample.swift
 //  SNetworkLayer_Example
 //
 //  Created by Lucas Rodrigues Dias on 19/02/25.
@@ -9,39 +9,47 @@
 import Foundation
 import SNetworkLayer
 
-enum APIStruct {
-    case testUrl
+enum APIExample {
+    case endpointExample
 }
 
-extension APIStruct: Target {    
+extension APIExample: Target {
+    var baseURL: URL {
+        guard let url = URL(string: "") else {
+            assertionFailure("Invalid static URL string: ")
+            return URL(fileURLWithPath: "")
+        }
+        return url
+    }
+    
     var headerParamaters: [String : String]? {
         return nil
     }
     
     var path: String {
         switch self {
-        case .testUrl:
-            return "endpoint/test"
+        case .endpointExample:
+            return "endpoint/example"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .testUrl:
+        case .endpointExample:
             return .get
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .testUrl:
+        case .endpointExample:
             return nil
         }
     }
     
     var task: Task {
         switch self {
-        case .testUrl:
+        case .endpointExample:
             return .requestDefault
         }
     }
