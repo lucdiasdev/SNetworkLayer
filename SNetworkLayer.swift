@@ -8,6 +8,14 @@
 import Foundation
 import UIKit
 
+//struct AnyDecodingError<E: Error & Codable> {
+//    let originalError: Error
+//
+//    init(_ error: Error) {
+//        self.originalError = error
+//    }
+//}
+
 open class SNetworkLayer<T: Target> {
     
     private let urlSession: URLSession
@@ -101,10 +109,11 @@ open class SNetworkLayer<T: Target> {
     }
     
     //MARK: - WITH DATA CODABLE AND ERROR CUSTOM TYPE
+    /// fetch que recebe um codable `dataType` e um codable `errorType`
     @discardableResult
     private func superFetch<V: Codable, E: Codable>(_ target: T,
                                                     dataType: V.Type,
-                                                    errorType: E.Type? = nil,
+                                                    errorType: E.Type,
                                                     completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
         
         let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
@@ -144,14 +153,17 @@ open class SNetworkLayer<T: Target> {
             
             /// fallback de error
             /// tentativa de decodificar erro customizado
-            if let data = data, let errorType = errorType {
+            if let data = data {
                 do {
-                    let decodedError = try self.decode(data, to: errorType.self)
+                    let decodedError = try self.decode(data, to: E.self)
                     completion?(.failure(.apiCustomError(decodedError)), response)
-                    return
                 } catch {
                     completion?(.failure(.decode(error)), response)
                 }
+                return
+            } else {
+                completion?(.failure(.noData), response)
+                return
             }
         }
         
@@ -161,7 +173,7 @@ open class SNetworkLayer<T: Target> {
     @discardableResult
     public func fetch<V: Codable, E: Codable>(_ target: T,
                                               dataType: V.Type,
-                                              errorType: E.Type? = nil,
+                                              errorType: E.Type,
                                               completion: @escaping (Result<V, E>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
         /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
         /// adiciona o mapeamento automático para o tipo de erro customizado definido pelo projeto.
@@ -223,8 +235,10 @@ open class SNetworkLayer<T: Target> {
             /// tentativa de decodificar erro customizado
             if let data = data {
                 completion?(.failure(.apiError(data)), response)
+                return
             } else {
                 completion?(.failure(.noData), response)
+                return
             }
         }
         
@@ -273,12 +287,13 @@ open class SNetworkLayer<T: Target> {
                 do {
                     let decodedError = try self.decode(data, to: errorType.self)
                     completion?(.failure(.apiCustomError(decodedError)), response)
-                    return
                 } catch {
                     completion?(.failure(.decode(error)), response)
                 }
+                return
             } else {
                 completion?(.failure(.noData), response)
+                return
             }
         }
         
@@ -342,8 +357,10 @@ open class SNetworkLayer<T: Target> {
             /// fallback de error (nao existe um `custom error` neste fetch)
             if let data = data {
                 completion?(.failure(.apiError(data)), response)
+                return
             } else {
                 completion?(.failure(.noData), response)
+                return
             }
             
         }
