@@ -22,9 +22,9 @@ public enum FlowError: Error {
     case network(_ error: NetworkError)
     
     /// Erro de decode ao tentar decodificar sucesso ou erro customizado
-    case decode(_ error: Error)
+    case decode(_ error: Error?)
     
-    /// Erro de encode ao tentar passar um dict para Encoder
+    /// Erro de encode ao tentar passar um Encoder
     case encode(_ error: Error)
     
     /// Erro quando a resposta não pôde ser convertida para HTTPURLResponse
@@ -120,9 +120,9 @@ public extension FlowError {
     }
 }
 
-/// Tenta extrair e converter o erro `apiCustomError` para um tipo específico definido pelo projeto consumidor.
+/// tenta extrair e converter o erro `apiCustomError` para um tipo específico definido pelo projeto consumidor.
 ///
-/// Essa função é útil quando o consumidor do framework define um modelo customizado de erro (por exemplo, `MyBackendError`)
+/// essa função é útil quando o consumidor do framework define um modelo customizado de erro (por exemplo, `MyBackendError`)
 /// e precisa acessá-lo de forma segura após uma falha retornada como `FlowError`.
 ///
 /// - Parameter type: O tipo esperado do erro customizado definido pelo consumidor.
