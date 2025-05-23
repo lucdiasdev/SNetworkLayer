@@ -13,7 +13,7 @@ public enum FlowError: Error {
     case invalidRequest(_ error: Error)
     
     /// Erro vindo do backend, mapeado com o modelo de erro customizado do desenvolvedor
-    case apiCustomError(_ error: Any)
+    case apiCustomError(_ error: Codable?)
     
     /// Erro desconhecido — falha geral quando não conseguimos entender a resposta
     case apiError(_ data: Data?)
@@ -71,7 +71,8 @@ extension Error {
     }
 }
 
-/// protocolo que permite ao desenvolvedor fornecer mensagens customizadas para erros genericos de rede.
+//TODO: CORRIGIR ISSO AQUI DE ALGUMA FORMA
+/// protocolo que permite ao consumidor fornecer mensagens customizadas para erros genericos de rede.
 /// ao adotar esse protocolo, o projeto pode definir textos amigáveis para exibição ao usuário om base no tipo de erro de rede (ex: `notConnectedNetwork`, `timeOut` e etc)
 /// Ex:
 /// ```
@@ -96,11 +97,11 @@ public protocol NetworkErrorMessageProvider {
     func message(for error: NetworkError) -> String
 }
 
-/// enum que funciona como um ponto de configuração central do SNetworkLayer (`SNetworkLayerConfig`)
+/// enum que funciona como um ponto de configuração central do SNetworkLayer (`SNetworkLayerConfigProvider`)
 /// se preferir, pode ser configurado uma única vez, idealmente no início do ciclo de vida da aplicação.
 /// O `messageProvider` é uma referência injetável para um objeto que adota `NetworkErrorMessageProvider`,
-/// permitindo que o framework acesse mensagens customizadas sem acoplamento com o projeto do desenvolvedor.
-public enum SNetworkLayerConfig {
+/// permitindo que o framework acesse mensagens customizadas sem acoplamento com o projeto do consumidor.
+public enum SNetworkLayerConfigProvider {
     public static var messageProvider: NetworkErrorMessageProvider?
 }
 
@@ -113,25 +114,9 @@ public extension FlowError {
         case .network(let error):
             /// retorna a mensagem customizada definida pelo projeto para o tipo de NetworkError específico.
             /// no caso do exemplo acima foi configurado no `CustomErrorMessageProvider`
-            return SNetworkLayerConfig.messageProvider?.message(for: error)
+            return SNetworkLayerConfigProvider.messageProvider?.message(for: error)
         default:
             return nil
         }
-    }
-}
-
-/// tenta extrair e converter o erro `apiCustomError` para um tipo específico definido pelo projeto consumidor.
-///
-/// essa função é útil quando o consumidor do framework define um modelo customizado de erro (por exemplo, `MyBackendError`)
-/// e precisa acessá-lo de forma segura após uma falha retornada como `FlowError`.
-///
-/// - Parameter type: O tipo esperado do erro customizado definido pelo consumidor.
-/// - Returns: Uma instância do tipo esperado, caso o `FlowError` contenha um erro do tipo `apiCustomError` e o cast seja possível; caso contrário, retorna `nil`.
-public extension FlowError {
-    func `as`<T>(_ type: T.Type) -> T? {
-        if case let .apiCustomError(error) = self {
-            return error as? T
-        }
-        return nil
     }
 }

@@ -6,10 +6,9 @@
 //
 
 import Foundation
-import UIKit
 
 open class SNetworkLayer<T: Target> {
-    
+     
     private let urlSession: URLSession
     private let executor: ExecutorProtocol
     
@@ -23,7 +22,7 @@ open class SNetworkLayer<T: Target> {
     /// suponha que voce tenha sua classe de service conforme construção utilizando o SNetworkLayer:
     /// - ex.: `Class ExampleService: SNetworkLayer<ExampleAPI>`
     /// ao inicializar a instancia do seu service você utiliza `let service = ExampleService(requestTimeOut: .long, resourceTimeOut: .short)` ou alguma propriedade a sua escolha
-    public convenience init(requestTimeOut: TimeIntervalRequestType = .short, resourceTimeOut: TimeIntervalRequestType = .long,
+    public convenience init(requestTimeOut: TimeIntervalRequestType = .short, resourceTimeOut: TimeIntervalRequestType = .short,
                             urlCache: URLCache? = nil, urlCredentialStorage: URLCredentialStorage? = nil,
                             httpCookieAcceptPolicy: HTTPCookie.AcceptPolicy = .always,
                             cachePolicy: NSURLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData,
@@ -101,12 +100,11 @@ open class SNetworkLayer<T: Target> {
     }
     
     //MARK: - WITH DATA CODABLE AND ERROR CUSTOM TYPE
-    /// fetch que recebe um codable `dataType` e um codable `errorType`
     @discardableResult
-    private func superFetch<V: Codable, E: Codable>(_ target: T,
-                                                    dataType: V.Type,
-                                                    errorType: E.Type,
-                                                    completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
+    private func superFetch<V: Codable, E: Error & Codable>(_ target: T,
+                                                            dataType: V.Type,
+                                                            errorType: E.Type,
+                                                            completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
         
         let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
             guard let self = self else { return }
@@ -133,18 +131,14 @@ open class SNetworkLayer<T: Target> {
                 if let data = data {
                     do {
                         if let decoded = try self.decode(data, to: V.self) {
-                            print("DO: completion?(.success(decoded), response)")
                             completion?(.success(decoded), response)
                             return
                         }
-                        print("DO: completion?(.failure(.decode(nil)), response)")
                         completion?(.failure(.decode(nil)), response)
                     } catch {
-                        print("CATCH: completion?(.failure(.decode(error)), response)")
                         completion?(.failure(.decode(error)), response)
                     }
                 } else {
-                    print("ELSE: completion?(.failure(.noData), response)")
                     completion?(.failure(.noData), response)
                 }
                 return
@@ -169,11 +163,12 @@ open class SNetworkLayer<T: Target> {
         return task
     }
     
+    /// fetch que recebe um codable `dataType` e um codable `errorType`
     @discardableResult
     public func fetch<V: Codable, E: Error & Codable>(_ target: T,
                                                       dataType: V.Type,
                                                       errorType: E.Type,
-                                                      completion: @escaping (Result<V, E>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
+                                                      completion: @escaping (FlowResult<V, E>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
         /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
         /// adiciona o mapeamento automático para o tipo de erro customizado definido pelo projeto.
         /// permite que o consumidor lide apenas com o tipo de erro `E`, sem precisar conhecer `FlowError`
@@ -183,66 +178,71 @@ open class SNetworkLayer<T: Target> {
                 completion(.success(data), response)
             case .failure(let error):
                 if let errorType = error.as(E.self) {
-                    completion(.failure(errorType), response)
+                    completion(.failure(.custom(errorType)), response)
+                } else {
+                    completion(.failure(.system(error)), response)
                 }
             }
         }
     }
     
     //MARK: - WITH DATA CODABLE AND ERROR DEFAULT
-//    @discardableResult
-//    public func fetch<V: Codable>(_ target: T,
-//                                  dataType: V.Type,
-//                                  completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
-//        
-//        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
-//            guard let self = self else { return }
-//            
-//            /// erro nativo `NetworkError` (sem internet, timeout e etc)
-//            if let error = error {
-//                if case let FlowError.network(networkError) = error {
-//                    completion?(.failure(.network(networkError)), response)
-//                } else {
-//                    completion?(.failure(.network(.unknown)), response)
-//                }
-//                return
-//            }
-//            
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                completion?(.failure(.invalidResponse), response)
-//                return
-//            }
-//            
-//            let statusCode = httpResponse.statusCode
-//            
-//            /// sucesso (status 2xx)
-//            if (200...299).contains(statusCode) {
-//                if let data = data {
-//                    do {
-//                        let decoded = try self.decode(data, to: V.self)
-//                        completion?(.success(decoded), response)
-//                    } catch {
-//                        completion?(.failure(.decode(error)), response)
-//                    }
-//                } else {
-//                    completion?(.failure(.noData), response)
-//                }
-//                return
-//            }
-//            
-//            /// fallback de error
-//            /// tentativa de decodificar erro customizado
-//            if let data = data {
-//                completion?(.failure(.apiError(data)), response)
-//                return
-//            } else {
-//                completion?(.failure(.noData), response)
-//                return
-//            }
-//        }
-//        
-//        return task
-//    }
+    @discardableResult
+    public func fetch<V: Codable>(_ target: T,
+                                  dataType: V.Type,
+                                  completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
+        
+        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
+            guard let self = self else { return }
+            
+            /// erro nativo `NetworkError` (sem internet, timeout e etc)
+            if let error = error {
+                if case let FlowError.network(networkError) = error {
+                    completion?(.failure(.network(networkError)), response)
+                } else {
+                    completion?(.failure(.network(.unknown)), response)
+                }
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion?(.failure(.invalidResponse), response)
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            /// sucesso (status 2xx)
+            if (200...299).contains(statusCode) {
+                if let data = data {
+                    do {
+                        let decoded = try self.decode(data, to: V.self)
+                        guard let decoded = decoded else {
+                            completion?(.failure(.noData), response)
+                            return }
+                        completion?(.success(decoded), response)
+                    } catch {
+                        completion?(.failure(.decode(error)), response)
+                    }
+                } else {
+                    completion?(.failure(.noData), response)
+                }
+                return
+            }
+            
+            /// fallback de error
+            /// tentativa de decodificar erro customizado
+            if let data = data {
+                completion?(.failure(.apiError(data)), response)
+                return
+            } else {
+                completion?(.failure(.noData), response)
+                return
+            }
+        }
+        
+        return task
+    }
     
     //MARK: - WITH DATA DEFAULT AND ERROR CUSTOM TYPE
 //    @discardableResult
