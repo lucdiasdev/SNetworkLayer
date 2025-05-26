@@ -112,7 +112,12 @@ open class SNetworkLayer<T: Target> {
             /// erro nativo `NetworkError` (sem internet, timeout e etc)
             if let error = error {
                 if case let FlowError.network(networkError) = error {
-                    completion?(.failure(.network(networkError)), response)
+                    ///TODO: COLOCAR DESCRICAO AQUI
+                    if let mapper = SNetworkLayerConfiguration.provider?.networkErrorMapper, let mapped = mapper(networkError) as? E {
+                        completion?(.failure(.apiCustomError(mapped)), response)
+                    } else {
+                        completion?(.failure(.network(networkError)), response)
+                    }
                 } else {
                     completion?(.failure(.network(.unknown)), response)
                 }
@@ -366,5 +371,4 @@ open class SNetworkLayer<T: Target> {
 //        
 //        return task
 //    }
-
 }

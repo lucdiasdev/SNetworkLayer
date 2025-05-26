@@ -9,10 +9,10 @@ import Foundation
 
 public enum FlowFailure: Error {
     case custom(Codable & Error)
-    case system(Error)
+    case system(FlowError)
 }
 
-public enum FlowResult<S: Codable, E: Error> {
+public enum FlowResult<S: Codable, E: Error & Codable> {
     case success(S)
     case failure(FlowFailure)
     
