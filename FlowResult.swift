@@ -7,16 +7,16 @@
 
 import Foundation
 
-public enum FlowFailure: Error {
-    case custom(Codable & Error)
-    case system(FlowError)
-}
+//public enum FlowFailure: Error {
+//    case custom(Codable & Error)
+//    case system(FlowError)
+//}
 
 public enum FlowResult<S: Codable, E: Error & Codable> {
     case success(S)
-    case failure(FlowFailure)
+    case failure(E)
     
-    func mapResult() -> Result<S, FlowFailure> {
+    func mapResult() -> Result<S, E> {
         switch self {
         case .success(let codable):
             return .success(codable)

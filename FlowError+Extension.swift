@@ -19,6 +19,9 @@ public extension FlowError {
         if case let .apiCustomError(error) = self {
             return error as? T
         }
+//        if case let .network(error) = self {
+//            return error as? T
+//        }
         return nil
     }
 }
