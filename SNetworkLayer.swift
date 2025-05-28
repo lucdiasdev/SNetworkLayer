@@ -183,11 +183,8 @@ open class SNetworkLayer<T: Target> {
             case .success(let data):
                 completion(.success(data), response)
             case .failure(let error):
-                if let errorType = error.as(E.self) {
-                    completion(.failure(errorType), response)
-                } else {
-                    completion(.failure(error), response)
-                }
+                let errorType = error.as(E.self)
+                completion(.failure(errorType), response)
             }
         }
     }
