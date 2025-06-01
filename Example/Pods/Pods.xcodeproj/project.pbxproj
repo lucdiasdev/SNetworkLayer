@@ -19,6 +19,8 @@
 		AF62485B2D805C92009E485B /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62485A2D805C92009E485B /* Composer.swift */; };
 		AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */; };
 		AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */; };
+		AFE8194A2DE0E5EB009266D9 /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE819492DE0E5EB009266D9 /* FlowResult.swift */; };
+		AFE819D52DE10236009266D9 /* FlowError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE819D42DE10236009266D9 /* FlowError+Extension.swift */; };
 		B8648B75BA22D24B4571D92F9E5A4BB0 /* Pods-SNetworkLayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B791E1EEC5981200548974BFB99C0 /* Pods-SNetworkLayer_Example-dummy.m */; };
 		C8D7BAA629577BCBF1B6F538950D7AA6 /* Pods-SNetworkLayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C969696B1124D6152FDD29DAD4091DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
@@ -74,6 +76,8 @@
 		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
 		AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataTask.swift; sourceTree = "<group>"; };
 		AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTimeInterval.swift; sourceTree = "<group>"; };
+		AFE819492DE0E5EB009266D9 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
+		AFE819D42DE10236009266D9 /* FlowError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlowError+Extension.swift"; sourceTree = "<group>"; };
 		C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
 		CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				AF6248262D5A4AE8009E485B /* NetworkError.swift */,
 				AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */,
 				AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */,
+				AFE819492DE0E5EB009266D9 /* FlowResult.swift */,
+				AFE819D42DE10236009266D9 /* FlowError+Extension.swift */,
 				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
 				769E9250BEE25EF4838271CC68038329 /* Support Files */,
 			);
@@ -395,12 +401,14 @@
 			files = (
 				AF62481F2D5A4338009E485B /* Target.swift in Sources */,
 				AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */,
+				AFE819D52DE10236009266D9 /* FlowError+Extension.swift in Sources */,
 				AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */,
 				AF6248272D5A4AE8009E485B /* NetworkError.swift in Sources */,
 				AF6248232D5A440E009E485B /* Executor.swift in Sources */,
 				AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */,
 				AF62485B2D805C92009E485B /* Composer.swift in Sources */,
 				1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */,
+				AFE8194A2DE0E5EB009266D9 /* FlowResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

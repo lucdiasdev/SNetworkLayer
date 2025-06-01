@@ -5,9 +5,7 @@
 //  Created by Lucas Rodrigues Dias on 11/03/25.
 //
 
-import UIKit
-
-extension URL {
+private extension URL {
     init<T: Target>(target: T) {
         if target.path.isEmpty {
             self = target.baseURL
