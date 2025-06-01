@@ -14,5 +14,5 @@ import Foundation
 
 public enum FlowResult<S: Codable, E: Error & Codable> {
     case success(S)
-    case failure(E?, debug: FlowError?)
+    case failure(E?)
 }

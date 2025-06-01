@@ -15,7 +15,7 @@ import Foundation
 /// - Parameter type: O tipo esperado do erro customizado definido pelo consumidor.
 /// - Returns: Uma instância do tipo esperado, caso o `FlowError` contenha um erro do tipo `apiCustomError` e o cast seja possível; caso contrário, retorna `nil`.
 public extension FlowError {
-    func `as`<T>(_ type: T.Type) -> T? {
+    func `as`<T: Error>(_ type: T.Type) -> T? {
         if case let .apiCustomError(error) = self {
             return error as? T
         }

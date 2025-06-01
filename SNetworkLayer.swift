@@ -112,11 +112,13 @@ open class SNetworkLayer<T: Target> {
             /// erro nativo `NetworkError` (sem internet, timeout e etc)
             if let error = error {
                 if case let FlowError.network(networkError) = error {
-                    ///TODO: COLOCAR DESCRICAO AQUI
-                    ///TODO: MUDAR NOME DE `SNetworkLayerConfiguration` e outros que fazem sentido
-                    if let mapper = SNetworkLayerConfiguration.provider?.networkErrorMapper, let mapped = mapper(networkError) as? E {
+                    if let mapper = SNetworkLayerErrorConfiguration.provider?.networkErrorMapper, let mapped = mapper(networkError) as? E {
+                        /// regra aplicada para obter o mapper de erro configurado no projeto via SNetworkLayerConfiguration
+                        /// se o mapeador existir e conseguir transformar o `networkError` em um erro customizado do tipo `E
+                        /// retorna esse erro no completion, encapsulado em `.apiCustomError`
                         completion?(.failure(.apiCustomError(mapped)), response)
                     } else {
+                        /// se não houver mapeador ou o mapeamento falhar, retorna o erro de rede padrão.
                         completion?(.failure(.network(networkError)), response)
                     }
                 } else {
@@ -184,189 +186,232 @@ open class SNetworkLayer<T: Target> {
                 completion(.success(data), response)
             case .failure(let error):
                 let errorType = error.as(E.self)
+                errorType != nil ? nil : print("🚨 native error:\n\(error) \nconfigure SNetworkLayerConfigProvider to receive native error in cast for your errorType")
                 completion(.failure(errorType), response)
             }
         }
     }
     
     //MARK: - WITH DATA CODABLE AND ERROR DEFAULT
-//    @discardableResult
-//    public func fetch<V: Codable>(_ target: T,
-//                                  dataType: V.Type,
-//                                  completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
-//        
-//        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
-//            guard let self = self else { return }
-//            
-//            /// erro nativo `NetworkError` (sem internet, timeout e etc)
-//            if let error = error {
-//                if case let FlowError.network(networkError) = error {
-//                    completion?(.failure(.network(networkError)), response)
-//                } else {
-//                    completion?(.failure(.network(.unknown)), response)
-//                }
-//                return
-//            }
-//            
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                completion?(.failure(.invalidResponse), response)
-//                return
-//            }
-//            
-//            let statusCode = httpResponse.statusCode
-//            
-//            /// sucesso (status 2xx)
-//            if (200...299).contains(statusCode) {
-//                if let data = data {
-//                    do {
-//                        let decoded = try self.decode(data, to: V.self)
-//                        guard let decoded = decoded else {
-//                            completion?(.failure(.noData), response)
-//                            return }
-//                        completion?(.success(decoded), response)
-//                    } catch {
-//                        completion?(.failure(.decode(error)), response)
-//                    }
-//                } else {
-//                    completion?(.failure(.noData), response)
-//                }
-//                return
-//            }
-//            
-//            /// fallback de error
-//            /// tentativa de decodificar erro customizado
-//            if let data = data {
-//                completion?(.failure(.apiError(data)), response)
-//                return
-//            } else {
-//                completion?(.failure(.noData), response)
-//                return
-//            }
-//        }
-//        
-//        return task
-//    }
+    @discardableResult
+    public func superFetch<V: Codable>(_ target: T,
+                                       dataType: V.Type,
+                                       completion: ((Result<V, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
+        
+        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
+            guard let self = self else { return }
+            
+            /// erro nativo `NetworkError` (sem internet, timeout e etc)
+            if let error = error {
+                if case let FlowError.network(networkError) = error {
+                    completion?(.failure(.network(networkError)), response)
+                } else {
+                    completion?(.failure(.network(.unknown)), response)
+                }
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion?(.failure(.invalidResponse), response)
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            /// sucesso (status 2xx)
+            if (200...299).contains(statusCode) {
+                if let data = data {
+                    do {
+                        let decoded = try self.decode(data, to: V.self)
+                        guard let decoded = decoded else {
+                            completion?(.failure(.noData), response)
+                            return }
+                        completion?(.success(decoded), response)
+                    } catch {
+                        completion?(.failure(.decode(error)), response)
+                    }
+                } else {
+                    completion?(.failure(.noData), response)
+                }
+                return
+            }
+            
+            /// fallback de error
+            /// tentativa de decodificar erro customizado
+            if let data = data {
+                completion?(.failure(.apiError(data)), response)
+                return
+            } else {
+                completion?(.failure(.noData), response)
+                return
+            }
+        }
+        
+        return task
+    }
+    
+    /// fetch que recebe um codable `dataType` e um `Error`
+    @discardableResult
+    public func fetch<V: Codable>(_ target: T,
+                                  dataType: V.Type,
+                                  completion: @escaping (Result<V, Error>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
+        /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
+        /// adiciona o mapeamento para o tipo de resposta customizado definido pelo projeto.
+        /// permite que o consumidor lide apenas com o tipo de resposta `V`
+        return superFetch(target, dataType: dataType) { result, response in
+            switch result {
+            case .success(let data):
+                completion(.success(data), response)
+            case .failure(let error):
+                completion(.failure(error), response)
+            }
+        }
+    }
     
     //MARK: - WITH DATA DEFAULT AND ERROR CUSTOM TYPE
-//    @discardableResult
-//    private func superFetch<E: Codable>(_ target: T,
-//                                        errorType: E.Type,
-//                                        completion: ((Result<Data, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
-//        
-//        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
-//            guard let self = self else { return }
-//            
-//            /// erro nativo `NetworkError` (sem internet, timeout e etc)
-//            if let error = error {
-//                if case let FlowError.network(networkError) = error {
-//                    completion?(.failure(.network(networkError)), response)
-//                } else {
-//                    completion?(.failure(.network(.unknown)), response)
-//                }
-//                return
-//            }
-//            
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                completion?(.failure(.invalidResponse), response)
-//                return
-//            }
-//            
-//            let statusCode = httpResponse.statusCode
-//            
-//            /// sucesso (status 2xx)
-//            if (200...299).contains(statusCode) {
-//                if let data = data {
-//                    completion?(.success(data), response)
-//                } else {
-//                    completion?(.failure(.noData), response)
-//                }
-//                return
-//            }
-//            
-//            /// fallback de error
-//            /// tentativa de decodificar erro customizado
-//            if let data = data {
-//                do {
-//                    let decodedError = try self.decode(data, to: errorType.self)
-//                    completion?(.failure(.apiCustomError(decodedError)), response)
-//                } catch {
-//                    completion?(.failure(.decode(error)), response)
-//                }
-//                return
-//            } else {
-//                completion?(.failure(.noData), response)
-//                return
-//            }
-//        }
-//        
-//        return task
-//    }
+    @discardableResult
+    private func superFetch<E: Error & Codable>(_ target: T,
+                                                errorType: E.Type,
+                                                completion: ((Result<Data, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
+        
+        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
+            guard let self = self else { return }
+            
+            /// erro nativo `NetworkError` (sem internet, timeout e etc)
+            if let error = error {
+                if case let FlowError.network(networkError) = error {
+                    if let mapper = SNetworkLayerErrorConfiguration.provider?.networkErrorMapper, let mapped = mapper(networkError) as? E {
+                        /// regra aplicada para obter o mapper de erro configurado no projeto via SNetworkLayerConfiguration
+                        /// se o mapeador existir e conseguir transformar o `networkError` em um erro customizado do tipo `E
+                        /// retorna esse erro no completion, encapsulado em `.apiCustomError`
+                        completion?(.failure(.apiCustomError(mapped)), response)
+                    } else {
+                        /// se não houver mapeador ou o mapeamento falhar, retorna o erro de rede padrão.
+                        completion?(.failure(.network(networkError)), response)
+                    }
+                } else {
+                    completion?(.failure(.network(.unknown)), response)
+                }
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion?(.failure(.invalidResponse), response)
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            /// sucesso (status 2xx)
+            if (200...299).contains(statusCode) {
+                if let data = data {
+                    completion?(.success(data), response)
+                } else {
+                    completion?(.failure(.noData), response)
+                }
+                return
+            }
+            
+            /// fallback de error
+            /// tentativa de decodificar erro customizado
+            if let data = data {
+                do {
+                    let decodedError = try self.decode(data, to: errorType.self)
+                    completion?(.failure(.apiCustomError(decodedError)), response)
+                } catch {
+                    completion?(.failure(.decode(error)), response)
+                }
+                return
+            } else {
+                completion?(.failure(.noData), response)
+                return
+            }
+        }
+        
+        return task
+    }
     
-//    @discardableResult
-//    public func fetch<E: Codable>(_ target: T,
-//                                  errorType: E.Type,
-//                                  completion: @escaping (Result<Data, E>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
-//        /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
-//        /// adiciona o mapeamento automático para o tipo de erro customizado definido pelo projeto.
-//        /// permite que o consumidor lide apenas com o tipo de erro `E`, sem precisar conhecer `FlowError`
-//        return superFetch(target, errorType: errorType) { result, response in
-//            switch result {
-//            case .success(let data):
-//                completion(.success(data), response)
-//            case .failure(let error):
-//                if let errorType = error.as(E.self) {
-//                    completion(.failure(errorType), response)
-//                }
-//            }
-//        }
-//    }
+    /// fetch que recebe um `Data` e um codable `errorType`
+    @discardableResult
+    public func fetch<E: Error & Codable>(_ target: T,
+                                          errorType: E.Type,
+                                          completion: @escaping (FlowResult<Data, E>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
+        /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
+        /// adiciona o mapeamento automático para o tipo de erro customizado definido pelo projeto.
+        /// permite que o consumidor lide apenas com o tipo de erro `E`, sem precisar conhecer `FlowError`
+        return superFetch(target, errorType: errorType) { result, response in
+            switch result {
+            case .success(let data):
+                completion(.success(data), response)
+            case .failure(let error):
+                let errorType = error.as(E.self)
+                errorType != nil ? nil : print("🚨 native error:\n\(error) \nconfigure SNetworkLayerConfigProvider to receive native error in cast for your errorType")
+                completion(.failure(errorType), response)
+            }
+        }
+    }
     
     //MARK: - WITH DATA DEFAULT AND ERROR DEFAULT
-//    @discardableResult
-//    public func fetch(_ target: T,
-//                      completion: ((Result<Data, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
-//        
-//        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
-//            guard let _ = self else { return }
-//            
-//            /// erro nativo `NetworkError` (sem internet, timeout e etc)
-//            if let error = error {
-//                if case let FlowError.network(networkError) = error {
-//                    completion?(.failure(.network(networkError)), response)
-//                } else {
-//                    completion?(.failure(.network(.unknown)), response)
-//                }
-//                return
-//            }
-//            
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                completion?(.failure(.invalidResponse), response)
-//                return
-//            }
-//            
-//            let statusCode = httpResponse.statusCode
-//            
-//            /// sucesso (status 2xx)
-//            if (200...299).contains(statusCode) {
-//                if let data = data {
-//                    completion?(.success(data), response)
-//                } else {
-//                    completion?(.failure(.noData), response)
-//                }
-//                return
-//            }
-//            
-//            /// fallback de error (nao existe um `custom error` neste fetch)
-//            if let data = data {
-//                completion?(.failure(.apiError(data)), response)
-//                return
-//            } else {
-//                completion?(.failure(.noData), response)
-//                return
-//            }
-//            
-//        }
-//        
-//        return task
-//    }
+    @discardableResult
+    public func superFetch(_ target: T,
+                           completion: ((Result<Data, FlowError>, _ response: URLResponse?) -> Void)?) -> NetworkDataTask? {
+        
+        let task = self.composer(target, self.urlSession) { [weak self] data, request, response, error in
+            guard let _ = self else { return }
+            
+            /// erro nativo `NetworkError` (sem internet, timeout e etc)
+            if let error = error {
+                if case let FlowError.network(networkError) = error {
+                    completion?(.failure(.network(networkError)), response)
+                } else {
+                    completion?(.failure(.network(.unknown)), response)
+                }
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion?(.failure(.invalidResponse), response)
+                return
+            }
+            
+            let statusCode = httpResponse.statusCode
+            
+            /// sucesso (status 2xx)
+            if (200...299).contains(statusCode) {
+                if let data = data {
+                    completion?(.success(data), response)
+                } else {
+                    completion?(.failure(.noData), response)
+                }
+                return
+            }
+            
+            /// fallback de error (nao existe um `custom error` neste fetch)
+            if let data = data {
+                completion?(.failure(.apiError(data)), response)
+                return
+            } else {
+                completion?(.failure(.noData), response)
+                return
+            }
+            
+        }
+        
+        return task
+    }
+    
+    /// fetch que recebe um `Data` e um `Error`
+    @discardableResult
+    public func fetch(_ target: T,
+                      completion: @escaping (Result<Data, Error>, _ response: URLResponse?) -> Void) -> NetworkDataTask? {
+        /// encapsulamento de lógica do método `superFetch`, que reaproveita a lógica comum de requisição
+        return superFetch(target) { result, response in
+            switch result {
+            case .success(let data):
+                completion(.success(data), response)
+            case .failure(let error):
+                completion(.failure(error), response)
+            }
+        }
+    }
 }

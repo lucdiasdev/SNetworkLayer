@@ -121,10 +121,10 @@ extension Error {
 //    }
 //}
 //
-public protocol SNetworkLayerConfigProvider {
+public protocol SNetworkLayerErrorNetworkConfigProvider {
     static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? { get }
 }
 
-public struct SNetworkLayerConfiguration {
-    public static var provider: (any SNetworkLayerConfigProvider.Type)?
+public struct SNetworkLayerErrorConfiguration {
+    public static var provider: (any SNetworkLayerErrorNetworkConfigProvider.Type)?
 }
