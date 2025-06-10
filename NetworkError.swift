@@ -32,6 +32,9 @@ public enum FlowError: Error {
     
     /// Erro quando o Data é vazio
     case noData
+    
+    /// Erro desconhecido
+    case unknown
 }
 
 public enum NetworkError: Error {

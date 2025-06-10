@@ -18,7 +18,7 @@ import Foundation
 /// task?.suspend()
 /// ```
 ///
-public final class NetworkDataTask {
+public class NetworkDataTask {
     private let task: URLSessionDataTask?
     
     init(task: URLSessionDataTask?) {
