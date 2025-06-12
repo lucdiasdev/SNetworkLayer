@@ -10,71 +10,6 @@ import XCTest
 import Foundation
 @testable import SNetworkLayer
 
-// Spy para simular o comportamento do Executor
-class ExecutorSpy: ExecutorProtocol {
-    
-    // MARK: Propriedades para verificação
-    private(set) var executeCallCount = 0
-    private(set) var lastURLRequest: URLRequest?
-    private(set) var lastSession: URLSession?
-    
-    // MARK: Propriedades para controle do teste
-    var mockData: Data?
-    var mockResponse: URLResponse?
-    var mockError: FlowError?
-    var shouldInvokeCompletion: Bool = true
-    
-    // MARK: ExecutorProtocol
-    func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> NetworkDataTask {
-        executeCallCount += 1
-        lastURLRequest = urlRequest
-        lastSession = session
-        
-        if shouldInvokeCompletion {
-            completion(mockData, mockResponse, mockError)
-        }
-        
-        return NetworkDataTaskSpy() // Usamos um Spy para NetworkDataTask
-    }
-}
-
-// Spy para NetworkDataTask (opcional, mas útil para testes de cancelamento)
-class NetworkDataTaskSpy: NetworkDataTask {
-    // registro das chamadas
-    private(set) var cancelCallCount = 0
-    private(set) var suspendCallCount = 0
-    private(set) var resumeCallCount = 0
-    
-    // estado controlável para testes
-    var mockState: URLSessionTask.State = .suspended
-    
-    // inicializador vazio (não precisa de URLSessionDataTask real)
-    public init() {
-        super.init(task: URLSessionDataTask())
-    }
-    
-    // MARK: Métodos sobrescritos
-    public override func cancel() {
-        cancelCallCount += 1
-        mockState = .canceling
-    }
-    
-    public override func suspend() {
-        suspendCallCount += 1
-        mockState = .suspended
-    }
-    
-    public override func resume() {
-        resumeCallCount += 1
-        mockState = .running
-    }
-    
-    // sobrescrevendo a propriedade `state` para retornar o estado mockado
-    public override var state: URLSessionTask.State? {
-        return mockState
-    }
-}
-
 final class SNetworkLayerTests: XCTestCase {
     
     struct MockTarget: Target {
@@ -127,9 +62,10 @@ final class SNetworkLayerTests: XCTestCase {
         sut = nil
         super.tearDown()
     }
+    
+    //MARK: - TESTS FETCH WITH DATA CODABLE AND ERROR CUSTOM TYPE
 
     func test_fetch_success_shouldReturnDecodedModel() {
-        // Arrange
         let mockData = try! JSONEncoder().encode(MockModel(id: 123, test: "should return success decoded model - fetch with data codable and error custom type"))
         let mockResponse = HTTPURLResponse(url: MockTarget().baseURL,
                                            statusCode: 200,
@@ -141,9 +77,7 @@ final class SNetworkLayerTests: XCTestCase {
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success(let model):
                 XCTAssertEqual(model, MockModel(id: 123, test: "should return success decoded model - fetch with data codable and error custom type"))
@@ -155,14 +89,13 @@ final class SNetworkLayerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
         
-        // Verifica se o Executor foi chamado corretamente
+        /// verifica se o `Executor` foi chamado corretamente
         XCTAssertEqual(executorSpy.executeCallCount, 1)
         XCTAssertEqual(executorSpy.lastURLRequest?.url, MockTarget().baseURL.appendingPathComponent("/test"))
         XCTAssertEqual(executorSpy.lastURLRequest?.httpMethod, "GET")
     }
     
     func test_fetch_error_shouldReturnDecodedErrorModel() {
-        // Arrange
         let errorData = try! JSONEncoder().encode(MockErrorModel(id: 321, error: "error custom decodable", test: "should return error decoded model - fetch with data codable and error custom type"))
         let errorResponse = HTTPURLResponse(url: MockTarget().baseURL,
                                             statusCode: 401,
@@ -174,9 +107,7 @@ final class SNetworkLayerTests: XCTestCase {
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -188,21 +119,19 @@ final class SNetworkLayerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
         
-        // Verifica se o Executor foi chamado corretamente
+        /// verifica se o `Executor` foi chamado corretamente
         XCTAssertEqual(executorSpy.executeCallCount, 1)
         XCTAssertEqual(executorSpy.lastURLRequest?.url, MockTarget().baseURL.appendingPathComponent("/test"))
         XCTAssertEqual(executorSpy.lastURLRequest?.httpMethod, "GET")
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_timeOut() {
-        // Arrange
-        executorSpy.mockError = .network(.timeOut) // Simula timeout
+        // simula timeout
+        executorSpy.mockError = .network(.timeOut)
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -218,16 +147,14 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_withSNetworkLayerErrorNetworkConfigProvider_timeOut() {
-        // Arrange
-        executorSpy.mockError = .network(.timeOut) // Simula timeout
+        // simula timeout
+        executorSpy.mockError = .network(.timeOut)
         
         let expectation = self.expectation(description: "Completion called")
         
         SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -243,14 +170,12 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_notConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.notConnectedNetwork) // Simula timeout
+        // simula notConnectedNetwork
+        executorSpy.mockError = .network(.notConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -266,16 +191,14 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_withSNetworkLayerErrorNetworkConfigProvider_notConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.notConnectedNetwork) // Simula timeout
+        // simula notConnectedNetwork
+        executorSpy.mockError = .network(.notConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
         
         SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -291,14 +214,12 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_cancelConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.cancelConnectedNetwork) // Simula timeout
+        // simula cancelConnectedNetwork
+        executorSpy.mockError = .network(.cancelConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -314,16 +235,14 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_withSNetworkLayerErrorNetworkConfigProvider_cancelConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.cancelConnectedNetwork) // Simula timeout
+        // simula cancelConnectedNetwork
+        executorSpy.mockError = .network(.cancelConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
         
         SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -339,14 +258,12 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_lostConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.lostConnectedNetwork) // Simula timeout
+        // simula lostConnectedNetwork
+        executorSpy.mockError = .network(.lostConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
-        
-        // Act
+    
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -362,16 +279,14 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_withSNetworkLayerErrorNetworkConfigProvider_lostConnectedNetwork() {
-        // Arrange
-        executorSpy.mockError = .network(.lostConnectedNetwork) // Simula timeout
+        // simula lostConnectedNetwork
+        executorSpy.mockError = .network(.lostConnectedNetwork)
         
         let expectation = self.expectation(description: "Completion called")
         
         SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -387,14 +302,12 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_unknown() {
-        // Arrange
-        executorSpy.mockError = .network(.unknown) // Simula timeout
+        // simula unknown
+        executorSpy.mockError = .network(.unknown)
         
         let expectation = self.expectation(description: "Completion called")
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -410,16 +323,14 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     func test_fetch_networkError_shouldReturnNetworkError_withSNetworkLayerErrorNetworkConfigProvider_unknown() {
-        // Arrange
-        executorSpy.mockError = .network(.unknown) // Simula timeout
+        // simula unknown
+        executorSpy.mockError = .network(.unknown)
         
         let expectation = self.expectation(description: "Completion called")
         
         SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self
         
-        // Act
         _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
-            // Assert
             switch result {
             case .success:
                 XCTFail("Should not succeed")
@@ -433,4 +344,243 @@ final class SNetworkLayerTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func test_fetch_networkError_shouldReturnNetworkError_unknownCaseFlowErrorNetwork() {
+        executorSpy.mockError = .unknown
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_invalidData_shouldReturnDecodedModel_dataCorrupted() {
+        // Data não decodificável (.dataCorrupted) `statusCode 200`
+        let invalidData = Data("invalid json".utf8)
+        let validResponse = HTTPURLResponse(url: MockTarget().baseURL,
+                                            statusCode: 200,
+                                            httpVersion: nil,
+                                            headerFields: nil)
+        
+        executorSpy.mockData = invalidData
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_invalidData_shouldReturnDecodedModel_keyNotFound() {
+        // chave não encontrada (.keyNotFound) `statusCode 200`
+        let invalidData = """
+                          {
+                          "id": 99,
+                          "tester": "test"
+                          }
+                          """.data(using: .utf8)
+        let validResponse = HTTPURLResponse(url: MockTarget().baseURL,
+                                            statusCode: 200,
+                                            httpVersion: nil,
+                                            headerFields: nil)
+        
+        executorSpy.mockData = invalidData
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_invalidData_shouldReturnDecodedModel_typeMismatch() {
+        // tipo incompatível (.typeMismatch) `statusCode 200`
+        let invalidData = """
+                          {
+                          "id": 99,
+                          "test": 99
+                          }
+                          """.data(using: .utf8)
+        let validResponse = HTTPURLResponse(url: MockTarget().baseURL,
+                                            statusCode: 200,
+                                            httpVersion: nil,
+                                            headerFields: nil)
+        
+        executorSpy.mockData = invalidData
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_invalidData_shouldReturnDecodedModel_valueNotFound() {
+        // valor não encontrado para tipo (.valueNotFound) `statusCode 200`
+        let invalidData = """
+                          {
+                          "id": 99,
+                          "test": null
+                          }
+                          """.data(using: .utf8)
+        let validResponse = HTTPURLResponse(url: MockTarget().baseURL,
+                                            statusCode: 200,
+                                            httpVersion: nil,
+                                            headerFields: nil)
+        
+        executorSpy.mockData = invalidData
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_invalidData_shouldReturnDecodeError_dataCorrupted() {
+        // Data não decodificável (.dataCorrupted) `statusCode 401`
+        let invalidData = Data("invalid json".utf8)
+        let validResponse = HTTPURLResponse(url: MockTarget().baseURL,
+                                            statusCode: 401,
+                                            httpVersion: nil,
+                                            headerFields: nil)
+        
+        executorSpy.mockData = invalidData
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_noData_shouldReturnNoDataSuccess() {
+        let validResponse = HTTPURLResponse(
+            url: MockTarget().baseURL,
+            statusCode: 204, /// no content `Data`
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        executorSpy.mockData = nil
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_noData_shouldReturnNoDataError() {
+        let validResponse = HTTPURLResponse(
+            url: MockTarget().baseURL,
+            statusCode: 401, /// no content `Error/Data`
+            httpVersion: nil,
+            headerFields: nil
+        )
+        
+        executorSpy.mockData = nil
+        executorSpy.mockResponse = validResponse
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not succeed")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_fetch_response_shouldReturnResponseNil() {
+        executorSpy.mockResponse = nil
+        
+        let expectation = self.expectation(description: "Completion called")
+        
+        _ = sut.fetch(MockTarget(), dataType: MockModel.self, errorType: MockErrorModel.self) { result, _ in
+            switch result {
+            case .success:
+                XCTFail("Should not fail")
+            case .failure(let error):
+                XCTAssertEqual(error, nil)
+            }
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+        
+        /// verifica se o `Executor` foi chamado corretamente
+        XCTAssertEqual(executorSpy.executeCallCount, 1)
+        XCTAssertEqual(executorSpy.lastURLRequest?.url, MockTarget().baseURL.appendingPathComponent("/test"))
+        XCTAssertEqual(executorSpy.lastURLRequest?.httpMethod, "GET")
+    }
+    
 }

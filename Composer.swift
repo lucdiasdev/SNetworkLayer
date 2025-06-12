@@ -5,19 +5,23 @@
 //  Created by Lucas Rodrigues Dias on 11/03/25.
 //
 
-private extension URL {
-    init<T: Target>(target: T) {
-        if target.path.isEmpty {
-            self = target.baseURL
-        } else {
-            self = target.baseURL.appendingPathComponent(target.path)
-        }
-    }
-}
+//private extension URL {
+//    init<T: Target>(target: T) {
+//        if target.path.isEmpty {
+//            self = target.baseURL
+//        } else {
+//            self = target.baseURL.appendingPathComponent(target.path)
+//        }
+//    }
+//}
 
 enum ComposerTarget {
     static func composeRequest<T: Target>(_ target: T) throws -> URLRequest {
-        var urlRequest = URLRequest(url: URL(target: target))
+        guard let url = URL(string: target.baseURL.appendingPathComponent(target.path).absoluteString) else {
+            throw FlowError.invalidRequest(URLError(.badURL))
+        }
+        
+        var urlRequest = URLRequest(url: url)
         urlRequest.allHTTPHeaderFields = target.headerParamaters
         urlRequest.httpMethod = target.httpMethod.rawValue
         
@@ -53,7 +57,7 @@ enum ComposerTarget {
 }
 
 enum URLRequestBuilder {
-    static func encodeBody(_ encodable: Encodable, into request: URLRequest) throws -> URLRequest { //AQUI HTTP
+    static func encodeBody(_ encodable: Encodable, into request: URLRequest) throws -> URLRequest {
         var mutableRequest = request
         
         /// define o header padrão `Content-Type` como `application/json` caso ele não tenha sido definido pelo Target
@@ -83,7 +87,7 @@ enum URLRequestBuilder {
         }
     }
     
-    static func encodeBodyAndParameters(_ bodyParameters: [String: Any], _ queryParameters: [String: Any]?, into request: URLRequest) throws -> URLRequest { //AQUI HTTP
+    static func encodeBodyAndParameters(_ bodyParameters: [String: Any], _ queryParameters: [String: Any]?, into request: URLRequest) throws -> URLRequest {
         var mutableRequest = request
         
         /// define o header padrão `Content-Type` como `application/json` caso ele não tenha sido definido pelo Target
