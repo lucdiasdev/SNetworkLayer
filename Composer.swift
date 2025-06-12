@@ -46,7 +46,7 @@ enum ComposerTarget {
     }
 }
 
-enum URLRequestBuilder {
+private enum URLRequestBuilder {
     static func encodeBody(_ encodable: Encodable, into request: URLRequest) throws -> URLRequest {
         var mutableRequest = request
         
