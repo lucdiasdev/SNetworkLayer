@@ -5,16 +5,6 @@
 //  Created by Lucas Rodrigues Dias on 11/03/25.
 //
 
-//private extension URL {
-//    init<T: Target>(target: T) {
-//        if target.path.isEmpty {
-//            self = target.baseURL
-//        } else {
-//            self = target.baseURL.appendingPathComponent(target.path)
-//        }
-//    }
-//}
-
 enum ComposerTarget {
     static func composeRequest<T: Target>(_ target: T) throws -> URLRequest {
         guard let url = URL(string: target.baseURL.appendingPathComponent(target.path).absoluteString) else {

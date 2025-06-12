@@ -74,12 +74,12 @@ extension Error {
     }
 }
 
-//TODO: CORRIGIR ISSO AQUI DE ALGUMA FORMA
 /// protocolo que permite ao consumidor fornecer mensagens customizadas para erros genericos de rede.
-/// ao adotar esse protocolo, o projeto pode definir textos amigáveis para exibição ao usuário om base no tipo de erro de rede (ex: `notConnectedNetwork`, `timeOut` e etc)
+/// ao usar um `Error Decodable` seria necessario adotar esse protocolo
+/// o projeto pode definir textos amigáveis para exibição ao usuário com base no tipo de erro de rede (ex: `notConnectedNetwork`, `timeOut` e etc)
 /// Ex:
 /// ```
-/// final class CustomErrorMessageProvider: NetworkErrorMessageProvider {
+/// final class CustomErrorMessageProvider: SNetworkLayerErrorNetworkConfigProvider {
 ///     func message(for error: NetworkError) -> String {
 ///         switch error {
 ///         case .notConnectedNetwork:
@@ -96,34 +96,8 @@ extension Error {
 ///     }
 /// }
 /// ```
-//public protocol NetworkErrorProvider {
-//    func map(for error: NetworkError) -> (any Error & Codable)?
-//}
-
-/// enum que funciona como um ponto de configuração central do SNetworkLayer (`SNetworkLayerConfigProvider`)
-/// se preferir, pode ser configurado uma única vez, idealmente no início do ciclo de vida da aplicação.
-/// O `messageProvider` é uma referência injetável para um objeto que adota `NetworkErrorMessageProvider`,
-/// permitindo que o framework acesse mensagens customizadas sem acoplamento com o projeto do consumidor.
-//public enum SNetworkLayerConfigProvider {
-//    public static var networkErrorMapper: NetworkErrorProvider?
-//}
-
-/// extensão que adiciona uma propriedade computada à enum `FlowError`,
-/// permitindo acessar uma mensagem amigável associada a erros do tipo `.network`,
-/// caso o projeto tenha fornecido um `messageProvider` via `SNetworkLayerConfig`.
-//public extension FlowError {
-//    var userMessage: String? {
-//        switch self {
-//        case .network(let error):
-//            /// retorna a mensagem customizada definida pelo projeto para o tipo de NetworkError específico.
-//            /// no caso do exemplo acima foi configurado no `CustomErrorMessageProvider`
-//            return SNetworkLayerConfigProvider.messageProvider?.message(for: error)
-//        default:
-//            return nil
-//        }
-//    }
-//}
-//
+/// pode ser configurado uma única vez, idealmente no início do ciclo de vida da aplicação.
+/// um exemplo no AppDelegate/SceneDelegate `SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self`
 public protocol SNetworkLayerErrorNetworkConfigProvider {
     static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? { get }
 }
