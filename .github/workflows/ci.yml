@@ -1,0 +1,47 @@
+name: Run Unit Tests (CocoaPods)
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: macos-latest
+    
+    defaults:
+      run:
+        working-directory: Example
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install CocoaPods
+        run: |
+          gem install cocoapods
+          pod install
+
+      - name: Run Tests
+        run: |
+          xcodebuild test \
+            -workspace SNetworkLayer.xcworkspace \
+            -scheme SNetworkLayer-Example \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.4' \
+            -resultBundlePath TestResults
+
+      - name: Upload Dummy Artifact
+        run: |
+          mkdir output
+          echo "Hello Lucas" > output/test.txt
+
+      - name: Upload Test Results (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dummy-artifact
+          path: output
