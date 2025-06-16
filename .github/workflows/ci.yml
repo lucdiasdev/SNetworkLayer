@@ -31,9 +31,12 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.4' \
             -resultBundlePath TestResults
 
+    - name: Upload Dummy Artifact
+    run: mkdir output && echo "Hello" > output/test.txt
+    
       - name: Upload Test Results (optional)
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: TestResults
+          name: dummy-artifact
+          path: output
 
