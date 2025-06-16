@@ -25,7 +25,6 @@ jobs:
       - name: Install CocoaPods
         run: |
           gem install cocoapods
-          cd Example
           pod install
 
       - name: Run Tests
