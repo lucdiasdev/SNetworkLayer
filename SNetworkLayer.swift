@@ -67,9 +67,7 @@ open class SNetworkLayer<T: Target> {
         }
     }
     
-    private func decode<D: Decodable>(_ data: Data?, to type: D.Type) throws -> D? {
-        guard let data = data else { return nil }
-        
+    private func decode<D: Decodable>(_ data: Data, to type: D.Type) throws -> D {
         do {
             return try JSONDecoder().decode(D.self, from: data)
         } catch {
@@ -138,11 +136,9 @@ open class SNetworkLayer<T: Target> {
             if (200...299).contains(statusCode) {
                 if let data = data {
                     do {
-                        if let decoded = try self.decode(data, to: V.self) {
-                            completion?(.success(decoded), response)
-                            return
-                        }
-                        completion?(.failure(.decode(nil)), response)
+                        let decoded = try self.decode(data, to: V.self)
+                        completion?(.success(decoded), response)
+                        return
                     } catch {
                         completion?(.failure(.decode(error)), response)
                     }
@@ -223,10 +219,8 @@ open class SNetworkLayer<T: Target> {
                 if let data = data {
                     do {
                         let decoded = try self.decode(data, to: V.self)
-                        guard let decoded = decoded else {
-                            completion?(.failure(.noData), response)
-                            return }
                         completion?(.success(decoded), response)
+                        return
                     } catch {
                         completion?(.failure(.decode(error)), response)
                     }
