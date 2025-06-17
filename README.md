@@ -40,6 +40,10 @@ Em seguida, execute `pod install`
 
 Em qualquer arquivo em que você queira usar o SNetworkLayer, não se esqueça de importar o framework com `import SNetworkLayer`
 
+## ⌨️ Exemplos de implementação
+
+teste
+
 ## Author
 
 lucdiasdev, lucrodrigs@gmail.com
