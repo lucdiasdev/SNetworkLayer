@@ -1,9 +1,11 @@
 # SNetworkLayer
 [![Language: Swift 5](https://img.shields.io/badge/language-swift5-f48041.svg?style=flat)](https://developer.apple.com/swift)
+[![Platform](https://img.shields.io/cocoapods/p/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
 ![Platform: iOS 14+](https://img.shields.io/badge/platform-iOS%2014%2B-blue.svg?style=flat)
-[![SPM compatible](https://img.shields.io/badge/Cocoapods-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
+[![Cocoapods compatible](https://img.shields.io/badge/Cocoapods-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
+[![Version](https://img.shields.io/cocoapods/v/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
-[![License: MIT](http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat)](https://github.com/freshOS/ws/blob/master/LICENSE)
+[![License](https://img.shields.io/cocoapods/l/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/lucdiasdev/SNetworkLayer/ci.yml?branch=master&style=flat)](https://github.com/lucdiasdev/SNetworkLayer/actions/workflows/ci.yml)
 
 **`SNetworkLayer`** é um framework modular para chamadas de rede em Swift, com foco em extensibilidade, tratamento robusto de erros e suporte a múltiplos modelos de API. Ele permite ao desenvolvedor configurar requisições de forma clara e padronizada, com tratamento de erros customizável/nativo e suporte a cancelamento, pause e retomada de tarefas.
@@ -37,30 +39,6 @@ pod 'SNetworkLayer'
 Em seguida, execute `pod install`
 
 Em qualquer arquivo em que você queira usar o SNetworkLayer, não se esqueça de importar o framework com `import SNetworkLayer`
-
-
-
-# SNetworkLayer
-
-[![CI Status](https://img.shields.io/travis/lucdiasdev/SNetworkLayer.svg?style=flat)](https://travis-ci.org/lucdiasdev/SNetworkLayer)
-[![Version](https://img.shields.io/cocoapods/v/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
-[![License](https://img.shields.io/cocoapods/l/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
-[![Platform](https://img.shields.io/cocoapods/p/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-SNetworkLayer is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'SNetworkLayer'
-```
 
 ## Author
 
