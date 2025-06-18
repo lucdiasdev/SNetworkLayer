@@ -6,6 +6,7 @@
 [![Version](https://img.shields.io/cocoapods/v/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
 [![SPM compatible](https://img.shields.io/badge/SPM-compatible-4BC51D.svg?style=flat)](https://swift.org/package-manager/)
 [![License](https://img.shields.io/cocoapods/l/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
+[![codecov.io](https://codecov.io/github/lucdiasdev/SNetworkLayer/coverage.svg?branch=master)](https://codecov.io/github/lucdiasdev/SNetworkLayer?branch=master)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/lucdiasdev/SNetworkLayer/ci.yml?branch=master&style=flat)](https://github.com/lucdiasdev/SNetworkLayer/actions/workflows/ci.yml)
 
 **`SNetworkLayer`** é um framework modular para chamadas de rede em Swift, com foco em extensibilidade, tratamento robusto de erros e suporte a múltiplos modelos de API. Ele permite ao desenvolvedor configurar requisições de forma clara e padronizada, com tratamento de erros customizável/nativo e suporte a cancelamento, pause e retomada de tarefas.
