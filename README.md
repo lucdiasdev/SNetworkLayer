@@ -48,7 +48,7 @@ teste
 
 Lucas Rodrigues Dias, lucrodrigs@gmail.com
 
-[![Linkedin](https://i.sstatic.net/gVE0j.png)](https://www.linkedin.com/in/lucdiasdev/)
+[![LinkedIn](https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?logo=linkedin-white&logoColor=fff)](https://www.linkedin.com/in/lucdiasdev/)
 
 ## 📚 License
 
