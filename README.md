@@ -44,10 +44,10 @@ Em qualquer arquivo em que você queira usar o SNetworkLayer, não se esqueça d
 
 teste
 
-## Author
+## 🙎🏻‍♂️ Author
 
 lucdiasdev, lucrodrigs@gmail.com
 
-## License
+## 📚 License
 
 SNetworkLayer is available under the MIT license. See the LICENSE file for more info.

@@ -100,6 +100,7 @@ extension Error {
 /// um exemplo no AppDelegate/SceneDelegate `SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self`
 public protocol SNetworkLayerErrorNetworkConfigProvider {
     static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? { get }
+    static var decodableErrorMapper: ((DecodingError) -> (any Error & Codable)?)? { get }
 }
 
 public struct SNetworkLayerErrorConfiguration {
