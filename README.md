@@ -47,7 +47,8 @@ teste
 ## 🙎🏻‍♂️ Author
 
 Lucas Rodrigues Dias, lucrodrigs@gmail.com
-[![Linkedin](https://i.sstatic.net/gVE0j.png) LinkedIn](https://www.linkedin.com/in/lucdiasdev/)
+
+[![Linkedin](https://i.sstatic.net/gVE0j.png)](https://www.linkedin.com/in/lucdiasdev/)
 
 ## 📚 License
 
