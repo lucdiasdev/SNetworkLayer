@@ -25,6 +25,10 @@ final class SNetworkLayerTests: XCTestCase {
         let test: String
     }
     
+    struct MockModelErrorDecodable: Error, Codable, Equatable {
+        let error: String
+    }
+    
     struct MockErrorModel: Error, Codable, Equatable {
         let id: Int
         let error: String
@@ -32,6 +36,22 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     struct ConfigProviderErrorNetworkTest: SNetworkLayerErrorNetworkConfigProvider {
+        static var decodableErrorMapper: ((DecodingError) -> (any Error & Codable)?)? = { decodingError in
+            switch decodingError {
+            case .keyNotFound(let key, let context):
+                return MockErrorModel(id: 123, error: "keyNotFound", test: "")
+            case .typeMismatch(let type, let context):
+                return MockErrorModel(id: 123, error: "typeMismatch", test: "")
+            case .valueNotFound(let type, let context):
+                return MockErrorModel(id: 123, error: "valueNotFound", test: "")
+            case .dataCorrupted(let context):
+                return MockErrorModel(id: 123, error: "dataCorrupted", test: "")
+            default:
+                return MockErrorModel(id: 123, error: "unknown", test: "")
+            }
+        }
+        
+        
         static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? = { error in
             switch error {
             case .unknown:

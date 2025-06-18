@@ -111,7 +111,7 @@ open class SNetworkLayer<T: Target> {
             if let error = error {
                 if case let FlowError.network(networkError) = error {
                     if let mapper = SNetworkLayerErrorConfiguration.provider?.networkErrorMapper, let mapped = mapper(networkError) as? E {
-                        /// regra aplicada para obter o mapper de erro configurado no projeto via SNetworkLayerConfiguration
+                        /// regra aplicada para obter o mapper de erro configurado no projeto via SNetworkLayerErrorConfiguration
                         /// se o mapeador existir e conseguir transformar o `networkError` em um erro customizado do tipo `E
                         /// retorna esse erro no completion, encapsulado em `.apiCustomError`
                         completion?(.failure(.apiCustomError(mapped)), response)
@@ -138,9 +138,16 @@ open class SNetworkLayer<T: Target> {
                     do {
                         let decoded = try self.decode(data, to: V.self)
                         completion?(.success(decoded), response)
-                        return
                     } catch {
-                        completion?(.failure(.decode(error)), response)
+                        if let decodingError = error as? DecodingError, let mapper = SNetworkLayerErrorConfiguration.provider?.decodableErrorMapper, let mapped = mapper(decodingError) as? E  {
+                            /// regra aplicada para obter o mapper de erro configurado no projeto via SNetworkLayerErrorConfiguration
+                            /// se o mapeador existir e conseguir transformar o `decodingError` em um erro customizado do tipo `E
+                            /// retorna esse erro no completion, encapsulado em `.apiCustomError`
+                            completion?(.failure(.apiCustomError(mapped)), response)
+                        } else {
+                            /// se não houver mapeador ou o mapeamento falhar, retorna o erro de decodable padrão..
+                            completion?(.failure(.decode(error)), response)
+                        }
                     }
                 } else {
                     completion?(.failure(.noData), response)
