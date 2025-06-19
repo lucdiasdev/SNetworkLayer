@@ -69,15 +69,15 @@
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SNetworkLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5413A351FF9B07A15CEBB698517A708 /* Pods-SNetworkLayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Example.release.xcconfig"; sourceTree = "<group>"; };
-		AF62481E2D5A4338009E485B /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
-		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
-		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkLayer.swift; sourceTree = "<group>"; };
-		AF6248262D5A4AE8009E485B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
-		AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataTask.swift; sourceTree = "<group>"; };
-		AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTimeInterval.swift; sourceTree = "<group>"; };
-		AFE819492DE0E5EB009266D9 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
-		AFE819D42DE10236009266D9 /* FlowError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FlowError+Extension.swift"; sourceTree = "<group>"; };
+		AF62481E2D5A4338009E485B /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Target.swift; path = ../Target.swift; sourceTree = "<group>"; };
+		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Executor.swift; path = ../Executor.swift; sourceTree = "<group>"; };
+		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SNetworkLayer.swift; path = ../SNetworkLayer.swift; sourceTree = "<group>"; };
+		AF6248262D5A4AE8009E485B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = ../NetworkError.swift; sourceTree = "<group>"; };
+		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Composer.swift; path = ../Composer.swift; sourceTree = "<group>"; };
+		AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkDataTask.swift; path = ../NetworkDataTask.swift; sourceTree = "<group>"; };
+		AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkTimeInterval.swift; path = ../NetworkTimeInterval.swift; sourceTree = "<group>"; };
+		AFE819492DE0E5EB009266D9 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlowResult.swift; path = ../FlowResult.swift; sourceTree = "<group>"; };
+		AFE819D42DE10236009266D9 /* FlowError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FlowError+Extension.swift"; path = "../FlowError+Extension.swift"; sourceTree = "<group>"; };
 		C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
 		CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -146,15 +146,7 @@
 		3D17F34D1300086D0029E32D4CC9AF9D /* SNetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
-				AF6248222D5A440E009E485B /* Executor.swift */,
-				AF62485A2D805C92009E485B /* Composer.swift */,
-				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
-				AF62481E2D5A4338009E485B /* Target.swift */,
-				AF6248262D5A4AE8009E485B /* NetworkError.swift */,
-				AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */,
-				AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */,
-				AFE819492DE0E5EB009266D9 /* FlowResult.swift */,
-				AFE819D42DE10236009266D9 /* FlowError+Extension.swift */,
+				AFE5D41E2E038B10004E6030 /* Source */,
 				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
 				769E9250BEE25EF4838271CC68038329 /* Support Files */,
 			);
@@ -218,6 +210,22 @@
 			);
 			name = "Pods-SNetworkLayer_Tests";
 			path = "Target Support Files/Pods-SNetworkLayer_Tests";
+			sourceTree = "<group>";
+		};
+		AFE5D41E2E038B10004E6030 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AF6248222D5A440E009E485B /* Executor.swift */,
+				AF62485A2D805C92009E485B /* Composer.swift */,
+				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
+				AF62481E2D5A4338009E485B /* Target.swift */,
+				AF6248262D5A4AE8009E485B /* NetworkError.swift */,
+				AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */,
+				AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */,
+				AFE819492DE0E5EB009266D9 /* FlowResult.swift */,
+				AFE819D42DE10236009266D9 /* FlowError+Extension.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
