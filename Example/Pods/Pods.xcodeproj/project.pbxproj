@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8ABB587D7404E187AC725C5DE31BEB /* SNetworkLayer-dummy.m */; };
-		595114791901B15332482B9743FFA2FA /* SNetworkLayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AD2A7336B17D491033DC6A9F18B1E8 /* SNetworkLayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		876FF83F4579686CA5D822A6AF7DC58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		0094EEF9ECD2F3997EEC835C488BA0CE /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472CF9B3BAAC4EFE23DAD75CAB036144 /* Composer.swift */; };
+		052F83F8619CE2F032EF1C1EA4F136CB /* SNetworkLayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 910FEBBE3A5EF5C4258F5C999DDD4368 /* SNetworkLayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C5A9590C84AAF97CC08D4BE51F30B86 /* NetworkDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80D81B0AC5BCD6F91C4070BA0A877D4 /* NetworkDataTask.swift */; };
+		358285A1CCC9E85C538FB0C3F043C906 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B61C4ED91216FB3706CC3336EBFFC19 /* NetworkError.swift */; };
+		4E5540640A08CDC62AA381A96DD7AE5B /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E56726E461625F851EC901164937ACE /* FlowResult.swift */; };
+		5958CA1302DDA2066CB739AAAD7AE693 /* SNetworkLayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C76C34ABE4907C2C7E1A17A781AC4C68 /* SNetworkLayer-dummy.m */; };
+		7C0C713B44C43F321EFCA4499D65954F /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B65F4918B7F4829AC0EC2E5E1187498 /* Executor.swift */; };
+		7FAF08397322422CEE03F6426CDDDEA2 /* NetworkTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037E7DF52F845DC5308EA00E7B30D115 /* NetworkTimeInterval.swift */; };
 		95729083F538D622FB05BF82F4A7D2B1 /* Pods-SNetworkLayer_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13FE198D69E227CAD41934EEC7023506 /* Pods-SNetworkLayer_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A64133DC6ABBB71E848670A01EDACF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
-		AF62481F2D5A4338009E485B /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62481E2D5A4338009E485B /* Target.swift */; };
-		AF6248232D5A440E009E485B /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248222D5A440E009E485B /* Executor.swift */; };
-		AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248242D5A4476009E485B /* SNetworkLayer.swift */; };
-		AF6248272D5A4AE8009E485B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6248262D5A4AE8009E485B /* NetworkError.swift */; };
-		AF62485B2D805C92009E485B /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF62485A2D805C92009E485B /* Composer.swift */; };
-		AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */; };
-		AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */; };
-		AFE8194A2DE0E5EB009266D9 /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE819492DE0E5EB009266D9 /* FlowResult.swift */; };
-		AFE819D52DE10236009266D9 /* FlowError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE819D42DE10236009266D9 /* FlowError+Extension.swift */; };
+		ACD0B27D42D4BDE29DC051CDDB89AC15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		B6C7E98E07617C0E519582C6FEF618EC /* SNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93847BA28449BA42A9D7081854FAF77 /* SNetworkLayer.swift */; };
 		B8648B75BA22D24B4571D92F9E5A4BB0 /* Pods-SNetworkLayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 544B791E1EEC5981200548974BFB99C0 /* Pods-SNetworkLayer_Example-dummy.m */; };
+		BC3365519B83D94D8B79C7666CB9CCEA /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B46E1F52B8C8F2559E328EB42520C0 /* Target.swift */; };
 		C8D7BAA629577BCBF1B6F538950D7AA6 /* Pods-SNetworkLayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C969696B1124D6152FDD29DAD4091DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */; };
+		C98B051D4E0C85518BBE0FA91ADF025D /* FlowError+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74212E4AF573354C5B092912B7132346 /* FlowError+Extension.swift */; };
 		D116E240931266439A52655D34FC21B9 /* Pods-SNetworkLayer_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C9A20D832B6A5F0B54E89CE8629CD2 /* Pods-SNetworkLayer_Tests-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		15FF9DA776EC637BF8116A27D0667053 /* PBXContainerItemProxy */ = {
+		D8B3D558C4A127F7952C8A0C7E63369B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BC88F6624A2A1E6E8E625590E9FC2684;
 			remoteInfo = "Pods-SNetworkLayer_Example";
 		};
-		D5267010FDFD3B54B6F98FAFA73534DE /* PBXContainerItemProxy */ = {
+		DD52DA3F30BC727917939C64B0AD850C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -45,47 +45,47 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00AD2A7336B17D491033DC6A9F18B1E8 /* SNetworkLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-umbrella.h"; sourceTree = "<group>"; };
+		037E7DF52F845DC5308EA00E7B30D115 /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkTimeInterval.swift; sourceTree = "<group>"; };
 		06C9A20D832B6A5F0B54E89CE8629CD2 /* Pods-SNetworkLayer_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SNetworkLayer_Tests-dummy.m"; sourceTree = "<group>"; };
-		073295DF79C8CF4CD383D00CAE0BCBD3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		08740A36603436D8D61559F86B14271B /* SNetworkLayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNetworkLayer.debug.xcconfig; sourceTree = "<group>"; };
+		0B65F4918B7F4829AC0EC2E5E1187498 /* Executor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Executor.swift; sourceTree = "<group>"; };
 		0D32CE7CE8790D9F38C907E5DA7BB143 /* Pods-SNetworkLayer_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SNetworkLayer_Tests.modulemap"; sourceTree = "<group>"; };
-		13355D674E817397359477BCE350EE53 /* SNetworkLayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SNetworkLayer.modulemap; sourceTree = "<group>"; };
 		13FE198D69E227CAD41934EEC7023506 /* Pods-SNetworkLayer_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Example-umbrella.h"; sourceTree = "<group>"; };
 		262FA1E03C5FF0C9489A0D537469479D /* Pods-SNetworkLayer_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNetworkLayer_Example-Info.plist"; sourceTree = "<group>"; };
 		292B50DA442B83C6992CB0694A2FF345 /* Pods-SNetworkLayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SNetworkLayer_Example-frameworks.sh"; sourceTree = "<group>"; };
 		2E87AD8996D4D69A23F10E5516257C83 /* Pods-SNetworkLayer_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNetworkLayer_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		384DDA2CB25005BD6479B5987C619DD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3D8ABB587D7404E187AC725C5DE31BEB /* SNetworkLayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SNetworkLayer-dummy.m"; sourceTree = "<group>"; };
+		3D41BA440BB115A28D8A171D0B5CD272 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		3E5B096BF7C12C67E771599A59D01806 /* SNetworkLayer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SNetworkLayer-Info.plist"; sourceTree = "<group>"; };
+		472CF9B3BAAC4EFE23DAD75CAB036144 /* Composer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
+		4B61C4ED91216FB3706CC3336EBFFC19 /* NetworkError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4E56726E461625F851EC901164937ACE /* FlowResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
 		544B791E1EEC5981200548974BFB99C0 /* Pods-SNetworkLayer_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SNetworkLayer_Example-dummy.m"; sourceTree = "<group>"; };
 		59039CAE87C31002B2AE723FF56907B0 /* Pods-SNetworkLayer_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNetworkLayer_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		5A32DBC21D61DFC95AA874CEA3301C97 /* SNetworkLayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNetworkLayer.release.xcconfig; sourceTree = "<group>"; };
 		659226600DE98DD7DCE6CD769D0E09DD /* Pods-SNetworkLayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		7135F9584450735C8E516C548AE3AB4E /* SNetworkLayer.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SNetworkLayer.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		74212E4AF573354C5B092912B7132346 /* FlowError+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FlowError+Extension.swift"; sourceTree = "<group>"; };
 		78BF9E620DE7C3D47B31593573DEB638 /* Pods-SNetworkLayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SNetworkLayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		8052256C338F4C504E338A9007BEA73A /* SNetworkLayer.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SNetworkLayer.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		82AD181C52050B5D7D205ECF7C7C5585 /* Pods-SNetworkLayer_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SNetworkLayer_Example.modulemap"; sourceTree = "<group>"; };
+		8F52DE340C24CC8EB586D40D24526820 /* SNetworkLayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNetworkLayer.release.xcconfig; sourceTree = "<group>"; };
+		910FEBBE3A5EF5C4258F5C999DDD4368 /* SNetworkLayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-umbrella.h"; sourceTree = "<group>"; };
 		99428DD1B1AA16225DE87DF840769868 /* Pods-SNetworkLayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9A4E61FDE25F6DC027C30DE8E06E826B /* Pods-SNetworkLayer_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SNetworkLayer_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9B2C97B2B792BCA2963C79FC6754E996 /* Pods_SNetworkLayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SNetworkLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B2C97B2B792BCA2963C79FC6754E996 /* Pods-SNetworkLayer_Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SNetworkLayer_Tests"; path = Pods_SNetworkLayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SNetworkLayer; path = SNetworkLayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5413A351FF9B07A15CEBB698517A708 /* Pods-SNetworkLayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Example.release.xcconfig"; sourceTree = "<group>"; };
-		AF62481E2D5A4338009E485B /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Target.swift; path = ../Target.swift; sourceTree = "<group>"; };
-		AF6248222D5A440E009E485B /* Executor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Executor.swift; path = ../Executor.swift; sourceTree = "<group>"; };
-		AF6248242D5A4476009E485B /* SNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SNetworkLayer.swift; path = ../SNetworkLayer.swift; sourceTree = "<group>"; };
-		AF6248262D5A4AE8009E485B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = ../NetworkError.swift; sourceTree = "<group>"; };
-		AF62485A2D805C92009E485B /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Composer.swift; path = ../Composer.swift; sourceTree = "<group>"; };
-		AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkDataTask.swift; path = ../NetworkDataTask.swift; sourceTree = "<group>"; };
-		AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkTimeInterval.swift; path = ../NetworkTimeInterval.swift; sourceTree = "<group>"; };
-		AFE819492DE0E5EB009266D9 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlowResult.swift; path = ../FlowResult.swift; sourceTree = "<group>"; };
-		AFE819D42DE10236009266D9 /* FlowError+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FlowError+Extension.swift"; path = "../FlowError+Extension.swift"; sourceTree = "<group>"; };
-		C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
+		A80D81B0AC5BCD6F91C4070BA0A877D4 /* NetworkDataTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkDataTask.swift; sourceTree = "<group>"; };
+		B2B46E1F52B8C8F2559E328EB42520C0 /* Target.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		C0AA3714B85C1AFE67579649094F9542 /* Pods-SNetworkLayer_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SNetworkLayer_Example"; path = Pods_SNetworkLayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5CA20540842E5B2E0002BFAB16F85E5 /* SNetworkLayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SNetworkLayer.modulemap; sourceTree = "<group>"; };
+		C76C34ABE4907C2C7E1A17A781AC4C68 /* SNetworkLayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SNetworkLayer-dummy.m"; sourceTree = "<group>"; };
 		CC45FCCE5A3F117F3558A49A7A60EBC5 /* Pods-SNetworkLayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SNetworkLayer_Tests-umbrella.h"; sourceTree = "<group>"; };
-		CEF731D0636438C7977A62782697B15A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D4509B1D75B62E31D3F39345F10E3F57 /* SNetworkLayer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SNetworkLayer-Info.plist"; sourceTree = "<group>"; };
+		D4E3F9E5871B0B53225DCB547D60D35C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		D93847BA28449BA42A9D7081854FAF77 /* SNetworkLayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SNetworkLayer.swift; sourceTree = "<group>"; };
 		E311FDD6E0C8328379DC5A099B28A914 /* Pods-SNetworkLayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SNetworkLayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E31BE6B6D15B90ECFB00BE9841A0FA51 /* SNetworkLayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SNetworkLayer.debug.xcconfig; sourceTree = "<group>"; };
 		E6BF024F01049C76C7D8C08878165035 /* Pods-SNetworkLayer_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SNetworkLayer_Tests-Info.plist"; sourceTree = "<group>"; };
+		EA6095A1EEDD6B2684A143232C84C37D /* SNetworkLayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SNetworkLayer-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +97,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF2D144F232DF98B88696BB30029C1A4 /* Frameworks */ = {
+		3E0BB250DFAA9E0E6DA9700B50DBCAC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				876FF83F4579686CA5D822A6AF7DC58F /* Foundation.framework in Frameworks */,
+				ACD0B27D42D4BDE29DC051CDDB89AC15 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,9 +119,9 @@
 		1675F6BF2224BA2A1CAB83704477353A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */,
-				9B2C97B2B792BCA2963C79FC6754E996 /* Pods_SNetworkLayer_Tests.framework */,
-				9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer.framework */,
+				C0AA3714B85C1AFE67579649094F9542 /* Pods-SNetworkLayer_Example */,
+				9B2C97B2B792BCA2963C79FC6754E996 /* Pods-SNetworkLayer_Tests */,
+				9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,48 +143,37 @@
 			path = "Target Support Files/Pods-SNetworkLayer_Example";
 			sourceTree = "<group>";
 		};
-		3D17F34D1300086D0029E32D4CC9AF9D /* SNetworkLayer */ = {
+		58907B1E4795544BCE2B8C402505A96D /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				AFE5D41E2E038B10004E6030 /* Source */,
-				6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */,
-				769E9250BEE25EF4838271CC68038329 /* Support Files */,
-			);
-			name = SNetworkLayer;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		6BF663E6757D4C93A4BE9B53CCBC96C2 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				CEF731D0636438C7977A62782697B15A /* LICENSE */,
-				073295DF79C8CF4CD383D00CAE0BCBD3 /* README.md */,
-				7135F9584450735C8E516C548AE3AB4E /* SNetworkLayer.podspec */,
+				D4E3F9E5871B0B53225DCB547D60D35C /* LICENSE */,
+				3D41BA440BB115A28D8A171D0B5CD272 /* README.md */,
+				8052256C338F4C504E338A9007BEA73A /* SNetworkLayer.podspec */,
 			);
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		71AFD45AF7C219E9B6D089CEBA6D12A0 /* Development Pods */ = {
+		7502B02FE7C9680504EC0056DF75B921 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				3D17F34D1300086D0029E32D4CC9AF9D /* SNetworkLayer */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		769E9250BEE25EF4838271CC68038329 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				13355D674E817397359477BCE350EE53 /* SNetworkLayer.modulemap */,
-				3D8ABB587D7404E187AC725C5DE31BEB /* SNetworkLayer-dummy.m */,
-				D4509B1D75B62E31D3F39345F10E3F57 /* SNetworkLayer-Info.plist */,
-				C33D97580F17501F5142D571DE4790B7 /* SNetworkLayer-prefix.pch */,
-				00AD2A7336B17D491033DC6A9F18B1E8 /* SNetworkLayer-umbrella.h */,
-				E31BE6B6D15B90ECFB00BE9841A0FA51 /* SNetworkLayer.debug.xcconfig */,
-				5A32DBC21D61DFC95AA874CEA3301C97 /* SNetworkLayer.release.xcconfig */,
+				C5CA20540842E5B2E0002BFAB16F85E5 /* SNetworkLayer.modulemap */,
+				C76C34ABE4907C2C7E1A17A781AC4C68 /* SNetworkLayer-dummy.m */,
+				3E5B096BF7C12C67E771599A59D01806 /* SNetworkLayer-Info.plist */,
+				EA6095A1EEDD6B2684A143232C84C37D /* SNetworkLayer-prefix.pch */,
+				910FEBBE3A5EF5C4258F5C999DDD4368 /* SNetworkLayer-umbrella.h */,
+				08740A36603436D8D61559F86B14271B /* SNetworkLayer.debug.xcconfig */,
+				8F52DE340C24CC8EB586D40D24526820 /* SNetworkLayer.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/SNetworkLayer";
+			sourceTree = "<group>";
+		};
+		8218EF0FE7F384D41029FEDCDC282573 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA059C2124A7132CD3F0137FC050538F /* SNetworkLayer */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		A79D7C7B10816848F2EA0FB7FDF1EF9A /* Targets Support Files */ = {
@@ -212,27 +201,11 @@
 			path = "Target Support Files/Pods-SNetworkLayer_Tests";
 			sourceTree = "<group>";
 		};
-		AFE5D41E2E038B10004E6030 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				AF6248222D5A440E009E485B /* Executor.swift */,
-				AF62485A2D805C92009E485B /* Composer.swift */,
-				AF6248242D5A4476009E485B /* SNetworkLayer.swift */,
-				AF62481E2D5A4338009E485B /* Target.swift */,
-				AF6248262D5A4AE8009E485B /* NetworkError.swift */,
-				AFC43CE12DA46704008F38CE /* NetworkDataTask.swift */,
-				AFC43CE32DA468B1008F38CE /* NetworkTimeInterval.swift */,
-				AFE819492DE0E5EB009266D9 /* FlowResult.swift */,
-				AFE819D42DE10236009266D9 /* FlowError+Extension.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				71AFD45AF7C219E9B6D089CEBA6D12A0 /* Development Pods */,
+				8218EF0FE7F384D41029FEDCDC282573 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				1675F6BF2224BA2A1CAB83704477353A /* Products */,
 				A79D7C7B10816848F2EA0FB7FDF1EF9A /* Targets Support Files */,
@@ -255,9 +228,36 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		EA059C2124A7132CD3F0137FC050538F /* SNetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				472CF9B3BAAC4EFE23DAD75CAB036144 /* Composer.swift */,
+				0B65F4918B7F4829AC0EC2E5E1187498 /* Executor.swift */,
+				74212E4AF573354C5B092912B7132346 /* FlowError+Extension.swift */,
+				4E56726E461625F851EC901164937ACE /* FlowResult.swift */,
+				A80D81B0AC5BCD6F91C4070BA0A877D4 /* NetworkDataTask.swift */,
+				4B61C4ED91216FB3706CC3336EBFFC19 /* NetworkError.swift */,
+				037E7DF52F845DC5308EA00E7B30D115 /* NetworkTimeInterval.swift */,
+				D93847BA28449BA42A9D7081854FAF77 /* SNetworkLayer.swift */,
+				B2B46E1F52B8C8F2559E328EB42520C0 /* Target.swift */,
+				58907B1E4795544BCE2B8C402505A96D /* Pod */,
+				7502B02FE7C9680504EC0056DF75B921 /* Support Files */,
+			);
+			name = SNetworkLayer;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		7DC50AB0042183C7F819DC74547921AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				052F83F8619CE2F032EF1C1EA4F136CB /* SNetworkLayer-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB578F6B3CD9D222EE55321B022E1E3C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,14 +271,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				95729083F538D622FB05BF82F4A7D2B1 /* Pods-SNetworkLayer_Example-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F22EC3CD1B263253F88E653DCD80A20B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				595114791901B15332482B9743FFA2FA /* SNetworkLayer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,11 +289,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				86A6A4320562055DB481546D31AB92B5 /* PBXTargetDependency */,
+				1472C312F490BBEC097EE1E117C923E0 /* PBXTargetDependency */,
 			);
 			name = "Pods-SNetworkLayer_Example";
 			productName = Pods_SNetworkLayer_Example;
-			productReference = C0AA3714B85C1AFE67579649094F9542 /* Pods_SNetworkLayer_Example.framework */;
+			productReference = C0AA3714B85C1AFE67579649094F9542 /* Pods-SNetworkLayer_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 		CC76E611D5D82D51BE9E757D7189D6F6 /* Pods-SNetworkLayer_Tests */ = {
@@ -316,21 +308,21 @@
 			buildRules = (
 			);
 			dependencies = (
-				E16CC269CBB26ED5518D43A898978B05 /* PBXTargetDependency */,
+				DCEF66ADB8E2589CC3BE0CCF37E52B77 /* PBXTargetDependency */,
 			);
 			name = "Pods-SNetworkLayer_Tests";
 			productName = Pods_SNetworkLayer_Tests;
-			productReference = 9B2C97B2B792BCA2963C79FC6754E996 /* Pods_SNetworkLayer_Tests.framework */;
+			productReference = 9B2C97B2B792BCA2963C79FC6754E996 /* Pods-SNetworkLayer_Tests */;
 			productType = "com.apple.product-type.framework";
 		};
 		CF05CDAFA936472612C1F226FAE83834 /* SNetworkLayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 10D46E01D99D005386CFD9EFDC63A72B /* Build configuration list for PBXNativeTarget "SNetworkLayer" */;
+			buildConfigurationList = 46C70D8E1BAA38B9F8B7B4AC53AA2DE4 /* Build configuration list for PBXNativeTarget "SNetworkLayer" */;
 			buildPhases = (
-				F22EC3CD1B263253F88E653DCD80A20B /* Headers */,
-				EA971C1B9B86DD481A5441595B738263 /* Sources */,
-				BF2D144F232DF98B88696BB30029C1A4 /* Frameworks */,
-				918952D7E04970937373E3A5601220E9 /* Resources */,
+				7DC50AB0042183C7F819DC74547921AF /* Headers */,
+				B19C91467304360F8EEE16E25587B114 /* Sources */,
+				3E0BB250DFAA9E0E6DA9700B50DBCAC3 /* Frameworks */,
+				BF187A43AFD9E7CF2112D28EC1A7B1B2 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -338,7 +330,7 @@
 			);
 			name = SNetworkLayer;
 			productName = SNetworkLayer;
-			productReference = 9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer.framework */;
+			productReference = 9E14BBD45CA787F709B7453593E773DD /* SNetworkLayer */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -359,6 +351,8 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 1675F6BF2224BA2A1CAB83704477353A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -385,7 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		918952D7E04970937373E3A5601220E9 /* Resources */ = {
+		BF187A43AFD9E7CF2112D28EC1A7B1B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -403,20 +397,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EA971C1B9B86DD481A5441595B738263 /* Sources */ = {
+		B19C91467304360F8EEE16E25587B114 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF62481F2D5A4338009E485B /* Target.swift in Sources */,
-				AFC43CE22DA46704008F38CE /* NetworkDataTask.swift in Sources */,
-				AFE819D52DE10236009266D9 /* FlowError+Extension.swift in Sources */,
-				AFC43CE42DA468B1008F38CE /* NetworkTimeInterval.swift in Sources */,
-				AF6248272D5A4AE8009E485B /* NetworkError.swift in Sources */,
-				AF6248232D5A440E009E485B /* Executor.swift in Sources */,
-				AF6248252D5A4476009E485B /* SNetworkLayer.swift in Sources */,
-				AF62485B2D805C92009E485B /* Composer.swift in Sources */,
-				1CE6DE46B3EA0DFA2765BE01C34A74DA /* SNetworkLayer-dummy.m in Sources */,
-				AFE8194A2DE0E5EB009266D9 /* FlowResult.swift in Sources */,
+				0094EEF9ECD2F3997EEC835C488BA0CE /* Composer.swift in Sources */,
+				7C0C713B44C43F321EFCA4499D65954F /* Executor.swift in Sources */,
+				C98B051D4E0C85518BBE0FA91ADF025D /* FlowError+Extension.swift in Sources */,
+				4E5540640A08CDC62AA381A96DD7AE5B /* FlowResult.swift in Sources */,
+				0C5A9590C84AAF97CC08D4BE51F30B86 /* NetworkDataTask.swift in Sources */,
+				358285A1CCC9E85C538FB0C3F043C906 /* NetworkError.swift in Sources */,
+				7FAF08397322422CEE03F6426CDDDEA2 /* NetworkTimeInterval.swift in Sources */,
+				B6C7E98E07617C0E519582C6FEF618EC /* SNetworkLayer.swift in Sources */,
+				5958CA1302DDA2066CB739AAAD7AE693 /* SNetworkLayer-dummy.m in Sources */,
+				BC3365519B83D94D8B79C7666CB9CCEA /* Target.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,158 +425,27 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		86A6A4320562055DB481546D31AB92B5 /* PBXTargetDependency */ = {
+		1472C312F490BBEC097EE1E117C923E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SNetworkLayer;
 			target = CF05CDAFA936472612C1F226FAE83834 /* SNetworkLayer */;
-			targetProxy = D5267010FDFD3B54B6F98FAFA73534DE /* PBXContainerItemProxy */;
+			targetProxy = DD52DA3F30BC727917939C64B0AD850C /* PBXContainerItemProxy */;
 		};
-		E16CC269CBB26ED5518D43A898978B05 /* PBXTargetDependency */ = {
+		DCEF66ADB8E2589CC3BE0CCF37E52B77 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-SNetworkLayer_Example";
 			target = BC88F6624A2A1E6E8E625590E9FC2684 /* Pods-SNetworkLayer_Example */;
-			targetProxy = 15FF9DA776EC637BF8116A27D0667053 /* PBXContainerItemProxy */;
+			targetProxy = D8B3D558C4A127F7952C8A0C7E63369B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		52415D78914466AF00A3DB4820AD5206 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E311FDD6E0C8328379DC5A099B28A914 /* Pods-SNetworkLayer_Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7EE7A78859F657F6BEFC651185B43192 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		87B34C726F0385DC557217244E23D385 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 659226600DE98DD7DCE6CD769D0E09DD /* Pods-SNetworkLayer_Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		92B18BD9A57890AC390C04E20585B7EA /* Debug */ = {
+		0FB626BA5AB924DDF4DDC26787BDA327 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 99428DD1B1AA16225DE87DF840769868 /* Pods-SNetworkLayer_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -613,82 +476,12 @@
 			};
 			name = Debug;
 		};
-		96131CD9F221792F0B5B30CD0A99A2EF /* Release */ = {
+		1653EF652C27AB36D9E993E69745BF70 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A32DBC21D61DFC95AA874CEA3301C97 /* SNetworkLayer.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/SNetworkLayer/SNetworkLayer-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer.modulemap";
-				PRODUCT_MODULE_NAME = SNetworkLayer;
-				PRODUCT_NAME = SNetworkLayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9C47578DAE28988FDEE9BC57B48D1CD8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E31BE6B6D15B90ECFB00BE9841A0FA51 /* SNetworkLayer.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = NO;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				GCC_PREFIX_HEADER = "Target Support Files/SNetworkLayer/SNetworkLayer-prefix.pch";
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer.modulemap";
-				PRODUCT_MODULE_NAME = SNetworkLayer;
-				PRODUCT_NAME = SNetworkLayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B46F014E46456FD0CF78D749DC94A2C2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5413A351FF9B07A15CEBB698517A708 /* Pods-SNetworkLayer_Example.release.xcconfig */;
+			baseConfigurationReference = 659226600DE98DD7DCE6CD769D0E09DD /* Pods-SNetworkLayer_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -700,12 +493,48 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Example/Pods-SNetworkLayer_Example-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Example/Pods-SNetworkLayer_Example.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3E0565D140937DA477629BDAF22F2F7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E311FDD6E0C8328379DC5A099B28A914 /* Pods-SNetworkLayer_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Tests/Pods-SNetworkLayer_Tests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -720,7 +549,44 @@
 			};
 			name = Release;
 		};
-		D299434AB35E7FD6F7921C8EF24742FF /* Debug */ = {
+		440E6A832EB084DAF785249052EB7BBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F52DE340C24CC8EB586D40D24526820 /* SNetworkLayer.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SNetworkLayer/SNetworkLayer-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer.modulemap";
+				PRODUCT_MODULE_NAME = SNetworkLayer;
+				PRODUCT_NAME = SNetworkLayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4BC7450F9457737EE3E637BA155B56F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -786,23 +652,158 @@
 			};
 			name = Debug;
 		};
+		8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A440D191CC669A96CFB82E6957842D15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5413A351FF9B07A15CEBB698517A708 /* Pods-SNetworkLayer_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-SNetworkLayer_Example/Pods-SNetworkLayer_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SNetworkLayer_Example/Pods-SNetworkLayer_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C18989D376590A2CF45169EC579058C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08740A36603436D8D61559F86B14271B /* SNetworkLayer.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SNetworkLayer/SNetworkLayer-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SNetworkLayer/SNetworkLayer.modulemap";
+				PRODUCT_MODULE_NAME = SNetworkLayer;
+				PRODUCT_NAME = SNetworkLayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		0B27F4F9B1475E39FF4CB598A1527276 /* Build configuration list for PBXNativeTarget "Pods-SNetworkLayer_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87B34C726F0385DC557217244E23D385 /* Debug */,
-				52415D78914466AF00A3DB4820AD5206 /* Release */,
+				1653EF652C27AB36D9E993E69745BF70 /* Debug */,
+				3E0565D140937DA477629BDAF22F2F7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		10D46E01D99D005386CFD9EFDC63A72B /* Build configuration list for PBXNativeTarget "SNetworkLayer" */ = {
+		46C70D8E1BAA38B9F8B7B4AC53AA2DE4 /* Build configuration list for PBXNativeTarget "SNetworkLayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C47578DAE28988FDEE9BC57B48D1CD8 /* Debug */,
-				96131CD9F221792F0B5B30CD0A99A2EF /* Release */,
+				C18989D376590A2CF45169EC579058C6 /* Debug */,
+				440E6A832EB084DAF785249052EB7BBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -810,8 +811,8 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D299434AB35E7FD6F7921C8EF24742FF /* Debug */,
-				7EE7A78859F657F6BEFC651185B43192 /* Release */,
+				4BC7450F9457737EE3E637BA155B56F7 /* Debug */,
+				8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -819,8 +820,8 @@
 		FEB74E62C83775523DEADCF597BC5E5D /* Build configuration list for PBXNativeTarget "Pods-SNetworkLayer_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92B18BD9A57890AC390C04E20585B7EA /* Debug */,
-				B46F014E46456FD0CF78D749DC94A2C2 /* Release */,
+				0FB626BA5AB924DDF4DDC26787BDA327 /* Debug */,
+				A440D191CC669A96CFB82E6957842D15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
