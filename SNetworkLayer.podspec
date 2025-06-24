@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SNetworkLayer'
-  s.version          = '1.0.2'
+  s.version          = '1.0.3'
   s.summary          = 'Example for requester layer RESTful of SNetworkLayer.'
 
 # This description is used to generate tags and improve search results.
@@ -28,9 +28,8 @@ This my first pod, framework network requester with concurrency applied/classic
 
   s.ios.deployment_target = '14.0'
   s.swift_version = '5.0'
-  s.ios.deployment_target = '11.0'
 
-  s.source_files = '*.swift'
+  s.source_files = 'SNetworkLayer/Classes/**/*.swift'
   
   # s.resource_bundles = {
   #   'SNetworkLayer' => ['SNetworkLayer/Assets/*.png']
