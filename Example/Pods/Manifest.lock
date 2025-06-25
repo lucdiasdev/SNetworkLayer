@@ -1,5 +1,5 @@
 PODS:
-  - SNetworkLayer (1.0.2)
+  - SNetworkLayer (1.0.3)
 
 DEPENDENCIES:
   - SNetworkLayer (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SNetworkLayer: b02ecc6e307aa2a298ad5f445f8149e1e886936d
+  SNetworkLayer: 58317cbfa2a2af1f2a4c32d548639bb18611fc07
 
 PODFILE CHECKSUM: 233c3aa4ab119a8eb87f6edfc8dab9d0ffaf9f69
 
