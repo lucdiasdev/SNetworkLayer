@@ -1,4 +1,4 @@
-![SNetworkLayer: HTTP Networking Library](https://raw.githubusercontent.com/SNetworkLayer/SNetworkLayer/fix/update-pod-example/Assets/SNetworkLayerL.png)
+![SNetworkLayer: HTTP Networking Library](https://raw.githubusercontent.com/SNetworkLayer/SNetworkLayer/master/Assets/SNetworkLayerL.png)
 
 [![Language: Swift 5](https://img.shields.io/badge/language-swift5-f48041.svg?style=flat)](https://developer.apple.com/swift)
 [![Platform](https://img.shields.io/cocoapods/p/SNetworkLayer.svg?style=flat)](https://cocoapods.org/pods/SNetworkLayer)
