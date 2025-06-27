@@ -109,7 +109,7 @@ O objeto task existem os modelos para requisições, em alguns casos precisa ser
 
 ### 2. Faça a requisição usando sua Service (Utilize conforme a necessidade de uso com sua resposta de chamada, tanto para sucesso quanto para falha):
 
-- fetch que recebe um Data e um Error
+- fetch que recebe um **Data** e um **Error**
 ```swift
 class ExampleService: SNetworkLayer<MyApi> {
     func fetchGetExample(completion: @escaping (Result<Data, Error>) -> Void) {
@@ -122,7 +122,7 @@ class ExampleService: SNetworkLayer<MyApi> {
 }
 ```
 
-- fetch que recebe um sucesso decodificável e um erro decodificável
+- fetch que recebe um **sucesso decodificável** e um **erro decodificável**
 ```swift
 class ExampleService: SNetworkLayer<MyApi> {
     func fetchGetExample(completion: @escaping (FlowResult<MyData, MyBackendError>) -> Void) {
@@ -135,7 +135,7 @@ class ExampleService: SNetworkLayer<MyApi> {
 }
 ```
 
-- fetch que recebe um Data e um erro decodificável
+- fetch que recebe um **Data** e um **erro decodificável**
 ```swift
 class ExampleService: SNetworkLayer<MyApi> { 
     func fetchGetExample(completion: @escaping (FlowResult<Data, MyBackendError>) -> Void) {
@@ -147,7 +147,7 @@ class ExampleService: SNetworkLayer<MyApi> {
     }
 }
 ```
-- fetch que recebe um sucesso decodificável e um Erro
+- fetch que recebe um **sucesso decodificável** e um **Erro**
 ```swift
 class ExampleService: SNetworkLayer<MyApi> {
     func fetchGetExample(completion: @escaping (Result<MyData, Error>) -> Void) {
