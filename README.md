@@ -91,7 +91,8 @@ extension MyApi: Target {
     }
 }
 ```
-- Pontos adicionais sobre o protoclo `Target`:
+### - Pontos adicionais sobre o protoclo `Target`:
+
 O objeto httpMethod existem os tipos de métodos para requisições `.get`, `.post`, `.put`, `.delete` e `.path`.
 
 O objeto task existem os modelos para requisições, em alguns casos precisa ser definido o `EncodeParameters` que recebe `.query` para parametros de URL e `.http` que defini uma requisição como `x-www-form-urlencoded`, assim segue os modelos existentes para task:
@@ -106,7 +107,7 @@ O objeto task existem os modelos para requisições, em alguns casos precisa ser
 
 **.requestBodyAndQueryParameters(bodyParameters: [String: Any], queryParameters: [String: Any]?)** monta uma requisição com um conjunto de corpos do tipo dicionário permitindo passar parâmetros como corpo `body` da requisição e tambem parâmetros de URL como `query string` ao mesmo tempo
 
-2. Faça a requisição usando sua Service (Utilize conforme a necessidade de uso com sua resposta de chamada, tanto para sucesso quanto para falha):
+### 2. Faça a requisição usando sua Service (Utilize conforme a necessidade de uso com sua resposta de chamada, tanto para sucesso quanto para falha):
 
 - fetch que recebe um Data e um Error
 ```swift
