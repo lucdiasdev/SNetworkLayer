@@ -46,7 +46,7 @@ import SNetworkLayer
 
 ## ⌨️ Guia Rápido de Uso
 
-1. Crie sua API com conformidade ao protocolo Target:
+### 1. Crie sua API com conformidade ao protocolo Target:
 
 ```swift
 enum MyApi {
@@ -98,13 +98,13 @@ O objeto task existem os modelos para requisições, em alguns casos precisa ser
 
 **.requestDefault** monta uma requisição simples sem dados adicionais.
 
-**requestBodyEncodable(Encodable)** monta uma requisição com um ​​corpo `body` de solicitação definido com o tipo `Encodable`.
+**.requestBodyEncodable(Encodable)** monta uma requisição com um ​​corpo `body` de solicitação definido com o tipo `Encodable`.
 
-**requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)** monta uma requisição com parametros de URL como `query string` utilizando `.query` para **EncodeParameters** ou defini uma requisição como `x-www-form-urlencoded` utilizando `.http`.
+**.requestParameters(parameters: [String: Any], encodeParameters: EncodeParameters)** monta uma requisição com parametros de URL como `query string` utilizando `.query` para **EncodeParameters** ou defini uma requisição como `x-www-form-urlencoded` utilizando `.http`.
 
-**requestBodyEncodableWithParameters(Encodable, queryParameters: [String: Any])** monta uma requisição com um corpo `body` de solicitação definido com o tipo `Encodable` e tambem permite passar parâmetros de URL como `query string` em forma de um dict ao mesmo tempo.
+**.requestBodyEncodableWithParameters(Encodable, queryParameters: [String: Any])** monta uma requisição com um corpo `body` de solicitação definido com o tipo `Encodable` e tambem permite passar parâmetros de URL como `query string` em forma de um dict ao mesmo tempo.
 
-**requestBodyAndQueryParameters(bodyParameters: [String: Any], queryParameters: [String: Any]?)** monta uma requisição com um conjunto de corpos do tipo dicionário permitindo passar parâmetros como corpo `body` da requisição e tambem parâmetros de URL como `query string` ao mesmo tempo
+**.requestBodyAndQueryParameters(bodyParameters: [String: Any], queryParameters: [String: Any]?)** monta uma requisição com um conjunto de corpos do tipo dicionário permitindo passar parâmetros como corpo `body` da requisição e tambem parâmetros de URL como `query string` ao mesmo tempo
 
 2. Faça a requisição usando sua Service (Utilize conforme a necessidade de uso com sua resposta de chamada, tanto para sucesso quanto para falha):
 
