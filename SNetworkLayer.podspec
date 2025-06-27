@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SNetworkLayer'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'Example for requester layer RESTful of SNetworkLayer.'
 
 # This description is used to generate tags and improve search results.
