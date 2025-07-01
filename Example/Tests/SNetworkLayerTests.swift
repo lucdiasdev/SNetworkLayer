@@ -36,7 +36,7 @@ final class SNetworkLayerTests: XCTestCase {
     }
     
     struct ConfigProviderErrorNetworkTest: SNetworkLayerErrorNetworkConfigProvider {
-        static var decodableErrorMapper: ((DecodingError) -> (any Error & Codable)?)? = { decodingError in
+        static var decodableErrorMapper: ((DecodingError) -> (Error & Codable)) = { decodingError in
             switch decodingError {
             case .keyNotFound(let key, let context):
                 return MockErrorModel(id: 123, error: "keyNotFound", test: "")
@@ -52,7 +52,7 @@ final class SNetworkLayerTests: XCTestCase {
         }
         
         
-        static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? = { error in
+        static var networkErrorMapper: ((NetworkError) -> (Error & Codable)) = { error in
             switch error {
             case .unknown:
                 return MockErrorModel(id: 321, error: "error custom decodable unknown", test: "should return success decoded model - fetch with data codable and error custom type")
