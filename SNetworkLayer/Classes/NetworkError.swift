@@ -99,10 +99,10 @@ extension Error {
 /// pode ser configurado uma única vez, idealmente no início do ciclo de vida da aplicação.
 /// um exemplo no AppDelegate/SceneDelegate `SNetworkLayerErrorConfiguration.provider = ConfigProviderErrorNetworkTest.self`
 public protocol SNetworkLayerErrorNetworkConfigProvider {
-    static var networkErrorMapper: ((NetworkError) -> (any Error & Codable)?)? { get }
-    static var decodableErrorMapper: ((DecodingError) -> (any Error & Codable)?)? { get }
+    static var networkErrorMapper: ((NetworkError) -> (Error & Codable)) { get }
+    static var decodableErrorMapper: ((DecodingError) -> (Error & Codable)) { get }
 }
 
 public struct SNetworkLayerErrorConfiguration {
-    public static var provider: (any SNetworkLayerErrorNetworkConfigProvider.Type)?
+    public static var provider: SNetworkLayerErrorNetworkConfigProvider.Type?
 }
