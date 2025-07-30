@@ -36,6 +36,11 @@ class ExecutorSpy: ExecutorProtocol {
         
         return NetworkDataTaskSpy() // Usamos um Spy para NetworkDataTask
     }
+    
+    // MARK: ExecutorProtocol (async/await)
+    func execute(urlRequest: URLRequest, session: URLSession) async throws -> (Data?, URLResponse?) {
+        return (nil, nil)
+    }
 }
 
 // Spy para NetworkDataTask (opcional, mas útil para testes de cancelamento)

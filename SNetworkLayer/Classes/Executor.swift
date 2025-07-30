@@ -8,9 +8,8 @@
 import Foundation
 
 public protocol ExecutorProtocol {
-    func execute(urlRequest: URLRequest,
-                 session: URLSession,
-                 completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> NetworkDataTask
+    func execute(urlRequest: URLRequest, session: URLSession, completion: @escaping (Data?, URLResponse?, FlowError?) -> Void) -> NetworkDataTask
+    func execute(urlRequest: URLRequest, session: URLSession) async throws -> (Data?, URLResponse?)
 }
 
 public class Executor: ExecutorProtocol {
@@ -38,6 +37,35 @@ public class Executor: ExecutorProtocol {
         let networkDataTask = NetworkDataTask(task: task)
         networkDataTask.resume()
         return networkDataTask
+    }
+    
+    public func execute(urlRequest: URLRequest, session: URLSession) async throws -> (Data?, URLResponse?) {
+        let startTime = Date()
+        
+        do {
+            let (data, response) = try await session.data(for: urlRequest)
+            
+            let endTime = Date()
+            let duration = endTime.timeIntervalSince(startTime)
+            self.log(urlRequest, data, response, nil, duration: duration)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw FlowError.invalidResponse
+            }
+            
+            return (data, httpResponse)
+        } catch {
+            let endTime = Date()
+            let duration = endTime.timeIntervalSince(startTime)
+            self.log(urlRequest, nil, nil, error, duration: duration)
+            
+            if let error = error as NSError? {
+                let resolved = error.resolveNetworkError()
+                throw FlowError.network(resolved)
+            }
+            
+            throw FlowError.unknown
+        }
     }
     
     private func log(_ request: URLRequest, _ responseData: Data?, _ response: URLResponse?, _ error: Error?, duration: TimeInterval) {

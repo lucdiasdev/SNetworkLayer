@@ -9,8 +9,8 @@ import Foundation
 
 open class SNetworkLayer<T: Target> {
      
-    private let urlSession: URLSession
-    private let executor: ExecutorProtocol
+    let urlSession: URLSession
+    let executor: ExecutorProtocol
     
     public init(executor: ExecutorProtocol = Executor(), urlSessionConfiguration: URLSessionConfiguration) {
         self.executor = executor
@@ -67,7 +67,7 @@ open class SNetworkLayer<T: Target> {
         }
     }
     
-    private func decode<D: Decodable>(_ data: Data, to type: D.Type) throws -> D {
+    func decode<D: Decodable>(_ data: Data, to type: D.Type) throws -> D {
         do {
             return try JSONDecoder().decode(D.self, from: data)
         } catch {
